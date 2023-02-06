@@ -9,17 +9,24 @@ output: pdf_document
 
 (1) Your information
 
+\color{blue}
 Jacob Jameson
+\color{black}
+
 
 
 (2) Group Members (please list below the classmates you worked with on this problem set):
 
+\color{blue}
 Bohan Li, Jenna Rogers
+\color{black}
 
 
 (3)	Compliance with Harvard Kennedy School Academic Code
 
+\color{blue}
 I certify that my work in this problem set complies with the Harvard Kennedy School Academic Code
+\color{black}
 
 
 
@@ -28,6 +35,9 @@ I certify that my work in this problem set complies with the Harvard Kennedy Sch
 
 1.	Read the paper. Clearly state the primary research question that the authors are trying to answer. What makes this an interesting question? (2 points)
 
+\color{blue}
+The primary research question that the authors are trying to answer is whether or not capital in the form of in-kind grants such as inventory, supplies, and tangible resources -- or cash is more effective in spurring economic growth for male and female owned organizations. The reason that this is an interesting question is because standard models of investment state that for credit-constrained it should not matter whether or not the firm is receiving capital in the form of cash or in-kind grants, either should lead to the same increase in growth.
+\color{black}
 
 
 2.	Explain the main finding of the paper (including what the ‘flypaper effect’ is) using non-technical jargon, as if you were writing a brief policy memo.  Provide two versions:
@@ -35,10 +45,17 @@ I certify that my work in this problem set complies with the Harvard Kennedy Sch
 
   a.	In 3-5 sentences (without copying the article abstract or the text): (2 points)
 
+\color{blue}
+The flypaper effect is a concept from the field of public finance that suggests that a government grant to a recipient municipality increases the level of local public spending more than an increase in local income of an equivalent size. The main finding of the paper is that they find evidence of the flypaper effect among Ghanaian microenterprises, most notably for certain female entrepreneurs. They also found that in-kind grants lead to large increases in profits among female-owned firms with higher initial profitability.
+\color{black}
+
 
 
   b.	In a tweet, i.e. 280 characters or less: (1 point)
 
+\color{blue}
+
+\color{black}
 
 
 3.	Summarize the specific details of the treatment that participating businesses in this country underwent. (2 points)
@@ -115,18 +132,139 @@ I certify that my work in this problem set complies with the Harvard Kennedy Sch
 
   a.	Print your table below. (6 points)
  
+```{r, message=F, echo=F}
+library(tidyverse)
+library(foreign)
+library(gtsummary)
+library(gridExtra)
+library(haven)
+library(labelled)
+library(stargazer)
+library(lfe)
+```
+
+```{r, message=F, warning=F}
+data <- read_dta("data/ReplicationDataGhanaJDE.dta")
+
+num_obs <- data %>% 
+  filter(wave == 2) %>% 
+  mutate(count = sum(experimentsample)) %>%
+  select(count)
+
+num_obs <- num_obs[[1]][1]
+country <- 'Ghana'
+
+
+```
+
+
+
+ 
  
   b.	Are the differences in baseline profits between the control and treatment groups significant at the 0.05 level? (3 points)
+
+```{r, message=F, warning=F}
+data <- data %>%
+  select(assigntreat, sheno, questionnaire_date, realfinalprofit,
+         cashtreat, equiptreat, earlytreat, wave, experimentsample) %>%
+  filter(experimentsample == 1) %>%
+   mutate(`Study Arm` = case_when(
+     cashtreat == 1 ~ 0,
+     equiptreat == 1 ~ 1,
+     assigntreat == 0 ~ 2), 
+     `Study Arm` = recode_factor(`Study Arm`, 
+                                 "0" = "Cash", 
+                                 "1" = "In-kind",
+                                 "2" = 'Control')) %>%
+  arrange(sheno, questionnaire_date)
+
+data$baseline_profit <- data$realfinalprofit
+var_label(data$baseline_profit) <- "Baseline Profit"
+
+data %>%
+  filter(wave == 2) %>% 
+  select(baseline_profit, `Study Arm`) %>%
+  tbl_summary(by = `Study Arm`, type = all_continuous() ~ "continuous2",
+              statistic = all_continuous() ~ c("{mean} ({sd})"),
+              missing_text = "(Missing)") %>% 
+  add_p(pvalue_fun = ~style_pvalue(.x, digits = 2),
+        test = list(all_continuous() ~ "aov")) %>%
+  add_overall() %>% 
+  modify_header(label ~ "**Variable**") %>%
+  modify_caption("**Balance Test Baseline Profits for Control vs. Treatment Groups**") %>%
+  bold_labels()
+```
+
+\color{blue}
+There are no observable differences in baseline profits between the control and treatment groups. Using an ANOVA test we can see that the difference are not significant at the 0.05 level. This table matches the results in Table 2 by Fafchamps et. all.
+\color{black}
+
 
 
 18.	Reproduce the coefficient estimate and standard error estimates in columns (1-2) of Table 3: these correspond to the main pooled OLS specifications (Equation 5 in the paper) without and with sample trimming respectively. (3 points)
 
+```{r, eval=F}
+reg.1 <- lm(realfinalprofit ~ cashtreat + equiptreat, data)
+
+fe.reg <- felm(realfinalprofit ~ cashtreat + equiptreat|groupnum + wave, data)
+
+stargazer(reg.1, fe.reg, type = "latex", header = FALSE)
+
+```
+
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{realfinalprofit} \\ 
+\\[-1.8ex] & \textit{OLS} & \textit{felm} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ cashtreat & 11.653 & 11.178$^{*}$ \\ 
+  & (7.662) & (6.716) \\ 
+  & & \\ 
+ equiptreat & 24.242$^{***}$ & 22.024$^{***}$ \\ 
+  & (7.651) & (6.703) \\ 
+  & & \\ 
+ Constant & 112.049$^{***}$ &  \\ 
+  & (4.461) &  \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & 4,354 & 4,354 \\ 
+R$^{2}$ & 0.002 & 0.276 \\ 
+Adjusted R$^{2}$ & 0.002 & 0.241 \\ 
+Residual Std. Error & 206.712 (df = 4351) & 180.301 (df = 4152) \\ 
+F Statistic & 5.131$^{***}$ (df = 2; 4351) &  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+19.	Represent the values of column (5), rows 3 onward in Table 3 as a well-labeled coefficient plot. This corresponds to the main (untrimmed) OLS analysis finding treatment effects by gender and treatment type (Equation 6 in the paper). The figure must: (6 points)
+
+- Print the rounded coefficients and standard errors next to each point.
+- Define and use your own function for at least one part to avoid repetition.
+- Be estimated from the regression specification described in the paper. Therefore, all the numbers should match exactly as reported in Table 3. 
+- Be clean and well-labeled (i.e., have clear axis labels, no chartjunk, understandable to a reader who has not read the paper).
+ 
+
+Try implementing the fixed effects specification either for question 18 or 19 above, and report your coefficients as a table or coefficient plot respectively. (2 extra points)	
 
 
 
+20.	Submit your R script to the Canvas assignment as a separate .R file (or .Rmd file, if you used Rmarkdown). We may pass submissions through a program to check if they run. To pre-test your code, you can verify it runs on our environment. Go to the math camp space and copy the project API-210_PS-01_eval. The dataset is already uploaded in that project, so if you copy your R code and source/run everything after aligning the file paths, it should produce the correct figures and tables. (4 points)
 
 
-
+\color{blue}
+Done
+\color{black}
 
 
 
