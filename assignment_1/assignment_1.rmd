@@ -53,14 +53,14 @@ The flypaper effect is a concept from the field of public finance that suggests 
 
   b.	In a tweet, i.e. 280 characters or less: (1 point)
 
-\color{blue}
-
-\color{black}
+c
 
 
 3.	Summarize the specific details of the treatment that participating businesses in this country underwent. (2 points)
 
-
+\color{blue}
+The treatment 
+\color{black}
 
 4.	The authors note that their experimental design is very similar to an earlier study in Sri Lanka. What reasons do they give to conduct a separate study, rather than expecting the findings of that research to apply in this context? (2 points)
 
@@ -84,7 +84,22 @@ The flypaper effect is a concept from the field of public finance that suggests 
 
 7.	Defining treatment as being assigned to the grants program, what is the difference between the ITT and TOT in this context? Which do the authors report and why do they make this decision? Write an equation (using potential outcomes notation) that shows what the authors are trying to estimate. (3 points)
 
+\color{blue}
 
+The difference between the ITT (Intent-to-Treat) and TOT (Treatment-on-the-Treated) is as that the ITT estimates the average treatment effect among all individuals who were randomly assigned to the grants program, regardless of whether they actually received the treatment (participation in the program) or not, where the TOT estimates the average treatment effect among only those individuals who actually received the treatment (participated in the program).
+
+Fafchamps et al. report the ITT, as they aim to estimate the average effect of being assigned to the grants program, rather than just the effect of participating in the program.
+
+The equation showing what the authors are trying to estimate can be expressed as:
+
+\[Y_{it} = \beta_0 + D\beta_1 + \varepsilon_i\]
+
+Where $Y_{it}$ is the potential outcome (profits) of individual $i$ in wave $t$ if they were assigned to the grants program, $D$ is a binary variable indicating treatment assignment (1 if assigned to the grants program, 0 otherwise), $\beta_0$ is the average potential outcome in the control group, $\beta_1$ is the average treatment effect, and $\varepsilon_i$ is the error term.
+
+Hence the authors are estimating $\beta_1$, the average treatment effect of being assigned to the grants program on the potential outcome $Y_{it}$.
+
+
+\color{black}
 
 8.	At what level do the authors clustered their standard errors of the main results of the paper (if at all)? Briefly note why the authors cluster the standard errors and why this is the appropriate level to cluster at. (2 extra points)
 
@@ -166,7 +181,8 @@ country <- 'Ghana'
 ```{r, message=F, warning=F}
 data <- data %>%
   select(assigntreat, sheno, questionnaire_date, realfinalprofit,
-         cashtreat, equiptreat, earlytreat, wave, experimentsample) %>%
+         cashtreat, equiptreat, earlytreat, wave, experimentsample,
+         groupnum) %>%
   filter(experimentsample == 1) %>%
    mutate(`Study Arm` = case_when(
      cashtreat == 1 ~ 0,
@@ -204,15 +220,21 @@ There are no observable differences in baseline profits between the control and 
 18.	Reproduce the coefficient estimate and standard error estimates in columns (1-2) of Table 3: these correspond to the main pooled OLS specifications (Equation 5 in the paper) without and with sample trimming respectively. (3 points)
 
 ```{r, eval=F}
-reg.1 <- lm(realfinalprofit ~ cashtreat + equiptreat, data)
+data_sub <- data %>% 
+  mutate(sub = ifelse(wave == 2 & realfinalprofit > 1500, 1, 0),
+         sub = ifelse(wave == 1 & realfinalprofit > 1500, 1, sub)) %>%
+  group_by(sheno) %>%
+  mutate(sub = max(sub)) %>%
+  filter(sub == 0) %>%
+  ungroup()
 
-fe.reg <- felm(realfinalprofit ~ cashtreat + equiptreat|groupnum + wave, data)
 
-stargazer(reg.1, fe.reg, type = "latex", header = FALSE)
+reg1 <- lm(realfinalprofit ~ cashtreat + equiptreat, data)
+reg2 <- lm(realfinalprofit ~ cashtreat + equiptreat, data_sub)
+summary(reg1)
+stargazer(reg1, reg2, type = "latex", header = FALSE)
 
 ```
-
-
 \begin{table}[!htbp] \centering 
   \caption{} 
   \label{} 
@@ -222,24 +244,22 @@ stargazer(reg.1, fe.reg, type = "latex", header = FALSE)
  & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
 \cline{2-3} 
 \\[-1.8ex] & \multicolumn{2}{c}{realfinalprofit} \\ 
-\\[-1.8ex] & \textit{OLS} & \textit{felm} \\ 
 \\[-1.8ex] & (1) & (2)\\ 
 \hline \\[-1.8ex] 
- cashtreat & 11.653 & 11.178$^{*}$ \\ 
-  & (7.662) & (6.716) \\ 
+ cashtreat & 11.653 & 17.179$^{***}$ \\ 
+  & (7.662) & (5.907) \\ 
   & & \\ 
- equiptreat & 24.242$^{***}$ & 22.024$^{***}$ \\ 
-  & (7.651) & (6.703) \\ 
+ equiptreat & 24.242$^{***}$ & 36.960$^{***}$ \\ 
+  & (7.651) & (5.878) \\ 
   & & \\ 
- Constant & 112.049$^{***}$ &  \\ 
-  & (4.461) &  \\ 
+ Constant & 112.049$^{***}$ & 100.624$^{***}$ \\ 
+  & (4.461) & (3.478) \\ 
   & & \\ 
 \hline \\[-1.8ex] 
-Observations & 4,354 & 4,354 \\ 
-R$^{2}$ & 0.002 & 0.276 \\ 
-Adjusted R$^{2}$ & 0.002 & 0.241 \\ 
-Residual Std. Error & 206.712 (df = 4351) & 180.301 (df = 4152) \\ 
-F Statistic & 5.131$^{***}$ (df = 2; 4351) &  \\ 
+Observations & 4,354 & 4,014 \\ 
+R$^{2}$ & 0.002 & 0.010 \\ 
+Adjusted R$^{2}$ & 0.002 & 0.009 \\ 
+Residual Std. Error & 206.712 (df = 4351) & 153.174 (df = 4011) \\ 
 \hline 
 \hline \\[-1.8ex] 
 \textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
