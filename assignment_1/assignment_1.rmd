@@ -103,13 +103,19 @@ Hence the authors are estimating $\beta_1$, the average treatment effect of bein
 
 8.	At what level do the authors clustered their standard errors of the main results of the paper (if at all)? Briefly note why the authors cluster the standard errors and why this is the appropriate level to cluster at. (2 extra points)
 
+\color{blue}
+In the main results of their paper, the authors cluster their standard errors at the firm level. This is the appropriate level to cluster at 
+
+\color{black}
 
 
 
 9.	To assess whether treatment was actually randomly assigned, we can examine the results of a balance test, presented in Table 2. Do the results in this table make you more or less confident about the validity of the paper’s results? Interpret one of the p-values from column (5). (3 points)
 
 
-
+\color{blue}
+Looking at Table 2, the results of the balance test, I am made more confident about the results that estimate using the full sample, but the trimmed sample seems less balanced (especially on baseline profits). That poor balance makes me skeptical of results that come from estimates on the trimmed sample. In the full sample, the p-value corresponding to the F-test of equality of means across the three groups is 0.985 for baseline profits, which indicates that we cannot reject the null hypothesis that the means are equal.
+\color{black}
 
 10.	Attrition in experiments like this one is often a concern for internal validity. Does the particular sort of attrition mentioned in this article give you reason to be concerned about the validity in this study? Describe using particular aspects of the experiment or its implementation. (1 point)
 
@@ -156,6 +162,9 @@ library(haven)
 library(labelled)
 library(stargazer)
 library(lfe)
+library(sandwich)  # Adjust standard errors
+library(lmtest) 
+library(broom)
 ```
 
 ```{r, message=F, warning=F}
@@ -182,7 +191,7 @@ country <- 'Ghana'
 data <- data %>%
   select(assigntreat, sheno, questionnaire_date, realfinalprofit,
          cashtreat, equiptreat, earlytreat, wave, experimentsample,
-         groupnum) %>%
+         groupnum, location, atreatcash, atreatequip, trimgroup) %>%
   filter(experimentsample == 1) %>%
    mutate(`Study Arm` = case_when(
      cashtreat == 1 ~ 0,
@@ -216,56 +225,58 @@ There are no observable differences in baseline profits between the control and 
 \color{black}
 
 
-
+\newpage
 18.	Reproduce the coefficient estimate and standard error estimates in columns (1-2) of Table 3: these correspond to the main pooled OLS specifications (Equation 5 in the paper) without and with sample trimming respectively. (3 points)
 
-```{r, eval=F}
-data_sub <- data %>% 
-  mutate(sub = ifelse(wave == 2 & realfinalprofit > 1500, 1, 0),
-         sub = ifelse(wave == 1 & realfinalprofit > 1500, 1, sub)) %>%
-  group_by(sheno) %>%
-  mutate(sub = max(sub)) %>%
-  filter(sub == 0) %>%
-  ungroup()
+```{r, results='hide'}
+reg1 <- felm(realfinalprofit ~ atreatcash + atreatequip |groupnum + wave|0|sheno, 
+             data)
 
+reg2 <- felm(realfinalprofit ~ atreatcash + atreatequip|groupnum + wave |0|sheno,
+             filter(data, is.na(trimgroup)))
 
-reg1 <- lm(realfinalprofit ~ cashtreat + equiptreat, data)
-reg2 <- lm(realfinalprofit ~ cashtreat + equiptreat, data_sub)
-summary(reg1)
-stargazer(reg1, reg2, type = "latex", header = FALSE)
+fe.reg1 <- felm(realfinalprofit ~ atreatcash + atreatequip |groupnum + 
+               wave + sheno|0|sheno, data)
 
+fe.reg2 <- felm(realfinalprofit ~ atreatcash + atreatequip|groupnum + 
+               wave + sheno |0|sheno,filter(data, is.na(trimgroup)))
+
+stargazer(reg1, reg2, fe.reg1, fe.reg2, 
+          type = "latex", title = 'Main Treatment Effects',
+          column.labels = c('OLS Full', 
+                            'OLS Trimmed', 
+                            'FE Full','FE Trimmed'), 
+          dep.var.labels = 'Real monthly profits (cedi)',
+          covariate.labels = c('Cash Treatment', 'In-kind Treatment'),
+          style = 'qje')
 ```
 \begin{table}[!htbp] \centering 
-  \caption{} 
+  \caption{Main Treatment Effects} 
   \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
- & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-3} 
-\\[-1.8ex] & \multicolumn{2}{c}{realfinalprofit} \\ 
-\\[-1.8ex] & (1) & (2)\\ 
+\\[-1.8ex] & \multicolumn{4}{c}{Real monthly profits (cedi)} \\ 
+ & OLS Full & OLS Trimmed & FE Full & FE Trimmed \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
 \hline \\[-1.8ex] 
- cashtreat & 11.653 & 17.179$^{***}$ \\ 
-  & (7.662) & (5.907) \\ 
-  & & \\ 
- equiptreat & 24.242$^{***}$ & 36.960$^{***}$ \\ 
-  & (7.651) & (5.878) \\ 
-  & & \\ 
- Constant & 112.049$^{***}$ & 100.624$^{***}$ \\ 
-  & (4.461) & (3.478) \\ 
-  & & \\ 
-\hline \\[-1.8ex] 
-Observations & 4,354 & 4,014 \\ 
-R$^{2}$ & 0.002 & 0.010 \\ 
-Adjusted R$^{2}$ & 0.002 & 0.009 \\ 
-Residual Std. Error & 206.712 (df = 4351) & 153.174 (df = 4011) \\ 
+ Cash Treatment & 14.503$^{*}$ & 9.589 & 3.962 & 0.482 \\ 
+  & (8.679) & (7.318) & (13.882) & (8.223) \\ 
+  & & & & \\ 
+ In-kind Treatment & 38.597$^{***}$ & 36.752$^{***}$ & 43.227$^{***}$ & 30.873$^{***}$ \\ 
+  & (11.206) & (10.670) & (12.306) & (10.725) \\ 
+  & & & & \\ 
+\textit{N} & 4,354 & 4,203 & 4,354 & 4,203 \\ 
+R$^{2}$ & 0.277 & 0.327 & 0.520 & 0.616 \\ 
+Adjusted R$^{2}$ & 0.242 & 0.294 & 0.379 & 0.503 \\ 
+Residual Std. Error & 180.116 (df = 4152) & 118.825 (df = 4007) & 163.066 (df = 3361) & 99.698 (df = 3244) \\ 
 \hline 
 \hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\textit{Notes:} & \multicolumn{4}{r}{$^{***}$Significant at the 1 percent level.} \\ 
+ & \multicolumn{4}{r}{$^{**}$Significant at the 5 percent level.} \\ 
+ & \multicolumn{4}{r}{$^{*}$Significant at the 10 percent level.} \\ 
 \end{tabular} 
 \end{table} 
-
 
 19.	Represent the values of column (5), rows 3 onward in Table 3 as a well-labeled coefficient plot. This corresponds to the main (untrimmed) OLS analysis finding treatment effects by gender and treatment type (Equation 6 in the paper). The figure must: (6 points)
 
@@ -274,6 +285,30 @@ Residual Std. Error & 206.712 (df = 4351) & 153.174 (df = 4011) \\
 - Be estimated from the regression specification described in the paper. Therefore, all the numbers should match exactly as reported in Table 3. 
 - Be clean and well-labeled (i.e., have clear axis labels, no chartjunk, understandable to a reader who has not read the paper).
  
+```{r}
+outcome <- "realfinalprofit"
+vars <- c("atreatcash", "atreatequip")
+vars <- c("atreatcashfemale", "atreatequipfemale", 
+               "atreatcashmale", "atreatequipmale")
+fe_1 <- "groupnum + wave"
+fe_2 <- "sheno + wave"
+iv <- "0"
+cluster <- "sheno"
+
+# helper function to create formula
+helper <- function(outcome, vars, fe, iv, cluster) {
+  as.formula(
+    paste(paste(paste(outcome, ' ~ '), paste(vars, collapse = ' + ')),
+          fe, iv, cluster, sep = ' | ')
+  )
+}
+felm(helper(outcome, vars, fe_2, iv, cluster), data)
+
+fe.reg2 <- felm(realfinalprofit ~ atreatcash + atreatequip|groupnum + 
+               wave + sheno |0|sheno,filter(data, is.na(trimgroup)))
+```
+
+
 
 Try implementing the fixed effects specification either for question 18 or 19 above, and report your coefficients as a table or coefficient plot respectively. (2 extra points)	
 
