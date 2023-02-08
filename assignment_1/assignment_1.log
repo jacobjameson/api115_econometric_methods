@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.5)  7 FEB 2023 21:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.5)  8 FEB 2023 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -494,28 +494,43 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 260.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 260.
-[2]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 419.
+[2] [3]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 421.
 (/Users/jacob/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 428.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 430.
 (/Users/jacob/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3] [4] [5]
-Overfull \hbox (33.55151pt too wide) in paragraph at lines 568--591
+)
+Overfull \hbox (5.99892pt too wide) in paragraph at lines 479--480
+ []\T1/lmr/m/n/10 Counry 
+ []
+
+
+Overfull \hbox (9.06903pt too wide) in paragraph at lines 493--493
+[]|\T1/lmr/m/n/10 Ghana|  
+ []
+
+
+Overfull \hbox (2.42926pt too wide) in paragraph at lines 493--493
+ []|\T1/lmr/m/n/10 Ghana| 
+ []
+
+[4] [5]
+Overfull \hbox (33.55151pt too wide) in paragraph at lines 632--655
  [][] 
  []
 
 [6]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 609.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 673.
 (/Users/jacob/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 639.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 703.
 
-Overfull \hbox (60.66217pt too wide) in paragraph at lines 668--697
+Overfull \hbox (60.66217pt too wide) in paragraph at lines 732--761
  [][] 
  []
 
@@ -525,18 +540,18 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 12106 strings out of 478024
- 189141 string characters out of 5839445
- 1866346 words of memory out of 5000000
- 32002 multiletter control sequences out of 15000+600000
+ 12108 strings out of 478024
+ 189153 string characters out of 5839445
+ 1869346 words of memory out of 5000000
+ 32003 multiletter control sequences out of 15000+600000
  557464 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,10n,90p,708b,501s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,10n,90p,708b,531s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on assignment_1.pdf (9 pages, 281187 bytes).
+Output written on assignment_1.pdf (9 pages, 282327 bytes).
 PDF statistics:
- 197 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
- 51 named destinations out of 1000 (max. 500000)
+ 198 PDF objects out of 1000 (max. 8388607)
+ 154 compressed objects within 2 object streams
+ 52 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

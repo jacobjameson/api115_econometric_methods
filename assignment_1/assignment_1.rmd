@@ -143,7 +143,7 @@ Looking at Table 2, the results of the balance test, I am made more confident ab
 
 16.	If you were a researcher at the World Bank interested in scaling up one or several of these treatments, what follow-up study would you propose to expand on these findings? Explain in 4-5 sentences as if you were trying to convince a policymaker of the need for additional research. (2 extra points)
 
-
+\newpage
 
 ## Data Analysis Questions (22 points + 2 extra points)
 
@@ -162,9 +162,6 @@ library(haven)
 library(labelled)
 library(stargazer)
 library(lfe)
-library(sandwich)  # Adjust standard errors
-library(lmtest) 
-library(broom)
 ```
 
 ```{r, message=F, warning=F}
@@ -174,17 +171,46 @@ num_obs <- data %>%
   filter(wave == 2) %>% 
   mutate(count = sum(experimentsample)) %>%
   select(count)
-
 num_obs <- num_obs[[1]][1]
+
 country <- 'Ghana'
+units <- length(unique(data$groupnum))
 
+baseline.control.mean <- round(mean(filter(data, wave==2, 
+                                     assigntreat == 0)$realfinalprofit, na.rm=T),3)
+baseline.control.sd <- round(sd(filter(data, wave==2, 
+                                     assigntreat == 0)$realfinalprofit, na.rm=T),3)
 
+baseline.control = paste(baseline.control.mean, 
+                         paste0(paste0('(', baseline.control.sd), ')'))
+
+baseline.treat.mean <- round(mean(filter(data, wave==2, 
+                                   assigntreat == 1)$realfinalprofit, na.rm=T),3)
+baseline.treat.sd <- round(sd(filter(data, wave==2, 
+                                   assigntreat == 1)$realfinalprofit, na.rm=T),3)
+
+baseline.treat = paste(baseline.treat.mean, 
+                       paste0(paste0('(', baseline.treat.sd), ')'))
+
+temp <- data.frame (`Country`  = country,
+                    `N Firms` = num_obs,
+                    `N Geographical Units` = 2,
+                    `Units of Randomization` = units,
+                    `Control Profits` = baseline.control,
+                    `Treat Profits` = baseline.treat)
+
+row.names(temp) <- 'Ghana'
+
+knitr::kable(temp, align='cccccc',
+             col.names = c("Counry",
+                           "Households (N)",
+                           "Geographies (N)",
+                           "Randomization Units",
+                           "Control Profits Mean (SD)",
+                           "Treat Profits Mean (SD)"))
 ```
 
 
-
- 
- 
   b.	Are the differences in baseline profits between the control and treatment groups significant at the 0.05 level? (3 points)
 
 ```{r, message=F, warning=F}
@@ -213,7 +239,7 @@ data %>%
         test = list(all_continuous() ~ "aov")) %>%
   add_overall() %>% 
   modify_header(label ~ "**Variable**") %>%
-  modify_caption("**Balance Test Baseline Profits for Control vs. Treatment Groups**") %>%
+  modify_caption("**Balance Test for Baseline Profits**") %>%
   bold_labels()
 ```
 
