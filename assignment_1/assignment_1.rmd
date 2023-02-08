@@ -189,9 +189,6 @@ country <- 'Ghana'
 
 ```{r, message=F, warning=F}
 data <- data %>%
-  select(assigntreat, sheno, questionnaire_date, realfinalprofit,
-         cashtreat, equiptreat, earlytreat, wave, experimentsample,
-         groupnum, location, atreatcash, atreatequip, trimgroup) %>%
   filter(experimentsample == 1) %>%
    mutate(`Study Arm` = case_when(
      cashtreat == 1 ~ 0,
@@ -226,6 +223,7 @@ There are no observable differences in baseline profits between the control and 
 
 
 \newpage
+
 18.	Reproduce the coefficient estimate and standard error estimates in columns (1-2) of Table 3: these correspond to the main pooled OLS specifications (Equation 5 in the paper) without and with sample trimming respectively. (3 points)
 
 ```{r, results='hide'}
@@ -278,6 +276,8 @@ Residual Std. Error & 180.116 (df = 4152) & 118.825 (df = 4007) & 163.066 (df = 
 \end{tabular} 
 \end{table} 
 
+\newpage
+
 19.	Represent the values of column (5), rows 3 onward in Table 3 as a well-labeled coefficient plot. This corresponds to the main (untrimmed) OLS analysis finding treatment effects by gender and treatment type (Equation 6 in the paper). The figure must: (6 points)
 
 - Print the rounded coefficients and standard errors next to each point.
@@ -285,13 +285,18 @@ Residual Std. Error & 180.116 (df = 4152) & 118.825 (df = 4007) & 163.066 (df = 
 - Be estimated from the regression specification described in the paper. Therefore, all the numbers should match exactly as reported in Table 3. 
 - Be clean and well-labeled (i.e., have clear axis labels, no chartjunk, understandable to a reader who has not read the paper).
  
-```{r}
+```{r, results='hide'}
 outcome <- "realfinalprofit"
-vars <- c("atreatcash", "atreatequip")
+
 vars <- c("atreatcashfemale", "atreatequipfemale", 
-               "atreatcashmale", "atreatequipmale")
-fe_1 <- "groupnum + wave"
-fe_2 <- "sheno + wave"
+          "atreatcashmale", "atreatequipmale")
+
+fe_1 <- ("groupnum + wave + wave2_female + 
+         wave3_female + wave4_female + wave5_female + wave6_female")
+
+fe_2 <- ("groupnum + sheno + wave + wave2_female + 
+         wave3_female + wave4_female + wave5_female + wave6_female")
+
 iv <- "0"
 cluster <- "sheno"
 
@@ -302,16 +307,67 @@ helper <- function(outcome, vars, fe, iv, cluster) {
           fe, iv, cluster, sep = ' | ')
   )
 }
-felm(helper(outcome, vars, fe_2, iv, cluster), data)
+reg.1 <- felm(helper(outcome, vars, fe_1, iv, cluster), data)
+reg.2 <- felm(helper(outcome, vars, fe_1, iv, cluster), filter(data, is.na(trimgroup)))
 
-fe.reg2 <- felm(realfinalprofit ~ atreatcash + atreatequip|groupnum + 
-               wave + sheno |0|sheno,filter(data, is.na(trimgroup)))
+reg.3 <- felm(helper(outcome, vars, fe_2, iv, cluster), data)
+reg.4 <- felm(helper(outcome, vars, fe_2, iv, cluster), filter(data, is.na(trimgroup)))
+
+stargazer(reg.1, reg.2, reg.3, reg.4,
+          type = "latex", title = 'Main Treatment Effects',
+          column.labels = c('OLS Full', 
+                            'OLS Trimmed', 
+                            'FE Full','FE Trimmed'), 
+          dep.var.labels = 'Real monthly profits (cedi)',
+          covariate.labels = c('Cash Treatment*female', 
+                               'In-kind Treatment*female',
+                               'Cash Treatment*male', 
+                               'In-kind Treatment*male'),
+          style = 'qje')
 ```
+\begin{table}[!htbp] \centering 
+  \caption{Main Treatment Effects} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+\\[-1.8ex] & \multicolumn{4}{c}{Real monthly profits (cedi)} \\ 
+ & OLS Full & OLS Trimmed & FE Full & FE Trimmed \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
+\hline \\[-1.8ex] 
+ Cash Treatment*female & 5.206 & 5.167 & 1.224 & $-$2.298 \\ 
+  & (8.469) & (8.545) & (9.335) & (8.758) \\ 
+  & & & & \\ 
+ In-kind Treatment*female & 35.753$^{**}$ & 37.653$^{**}$ & 35.609$^{***}$ & 32.867$^{**}$ \\ 
+  & (14.937) & (14.943) & (13.541) & (13.194) \\ 
+  & & & & \\ 
+ Cash Treatment*male & 28.993 & 16.814 & 8.739 & 5.132 \\ 
+  & (17.683) & (13.253) & (31.545) & (16.083) \\ 
+  & & & & \\ 
+ In-kind Treatment*male & 43.377$^{***}$ & 35.451$^{**}$ & 55.146$^{**}$ & 27.825 \\ 
+  & (16.801) & (14.044) & (23.030) & (18.130) \\ 
+  & & & & \\ 
+\textit{N} & 4,354 & 4,203 & 4,354 & 4,203 \\ 
+R$^{2}$ & 0.280 & 0.328 & 0.523 & 0.617 \\ 
+Adjusted R$^{2}$ & 0.244 & 0.294 & 0.415 & 0.530 \\ 
+Residual Std. Error & 179.947 (df = 4145) & 118.839 (df = 4000) & 158.322 (df = 3548) & 96.916 (df = 3425) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Notes:} & \multicolumn{4}{r}{$^{***}$Significant at the 1 percent level.} \\ 
+ & \multicolumn{4}{r}{$^{**}$Significant at the 5 percent level.} \\ 
+ & \multicolumn{4}{r}{$^{*}$Significant at the 10 percent level.} \\ 
+\end{tabular} 
+\end{table} 
 
+
+\vspace{1in}
 
 
 Try implementing the fixed effects specification either for question 18 or 19 above, and report your coefficients as a table or coefficient plot respectively. (2 extra points)	
 
+\color{blue}
+Done (see FE regression in 18 and 19)
+\color{black}
 
 
 20.	Submit your R script to the Canvas assignment as a separate .R file (or .Rmd file, if you used Rmarkdown). We may pass submissions through a program to check if they run. To pre-test your code, you can verify it runs on our environment. Go to the math camp space and copy the project API-210_PS-01_eval. The dataset is already uploaded in that project, so if you copy your R code and source/run everything after aligning the file paths, it should produce the correct figures and tables. (4 points)
@@ -320,8 +376,29 @@ Try implementing the fixed effects specification either for question 18 or 19 ab
 \color{blue}
 Done
 \color{black}
+\newpage
+
+## RCTs in Your Own Work (8 points)
+
+21.	Propose a specific policy question that could best be answered using an RCT.  Explain the question in non-technical terms in no more than 3-5 sentences. Write out the empirical specification you would use. (4 points)
+
+\color{blue}
+Done
+\color{black}
+
+22.	Describe your treatment group. Propose a comparison group and explain why you chose that group. (2 points)
+
+\color{blue}
+My treatment group would be recruited patients that have been randomized to the free/reduced dental care arm of the experiment. The comparison group would be those that were randomized to the control arm. This comparison makes sense because after randomization, the two groups should be balanced on characteristics that impact overall health.
+\color{black}
 
 
+23.	Is it possible that the control group could be “contaminated” as a result of interacting with the treatment group? Explain which measures you would take to limit this contamination. (2 points)
+
+
+\color{blue}
+In this case, it is very unlikely that the control group could be contaminated. The reason is because the treatment is being offered free/reduced dental care, and that benefit to the treatment group will not make those in the control group more likely to pursue dental care that they were not previously receiving.
+\color{black}
 
 
 
