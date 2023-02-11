@@ -46,31 +46,40 @@ The primary research question that the authors are trying to answer is whether o
   a.	In 3-5 sentences (without copying the article abstract or the text): (2 points)
 
 \color{blue}
-The flypaper effect is a concept from the field of public finance that suggests that a government grant to a recipient municipality increases the level of local public spending more than an increase in local income of an equivalent size. The main finding of the paper is that they find evidence of the flypaper effect among Ghanaian microenterprises, most notably for certain female entrepreneurs. They also found that in-kind grants lead to large increases in profits among female-owned firms with higher initial profitability.
+The flypaper effect, which is a term used to describe the tendency of agents to keep money received instead of investing it, was found to exist among microenterprises in Ghana. THe main finding of the paper is that the form in which is grant is given (cash or in-kind) impacts microenterprise profits. The authors find that this finding is only statistically significant amonog women-owned enterprises who earned above-mean profits prior to the experiment.
 \color{black}
 
 
 
   b.	In a tweet, i.e. 280 characters or less: (1 point)
 
-c
+\color{blue}
+
+In-kind grants are better for profit growth than cash grants, especially among female-owned enterprises who earned above-mean profits prior to the experiment in Ghana.
+
+\color{black}
 
 
 3.	Summarize the specific details of the treatment that participating businesses in this country underwent. (2 points)
 
 \color{blue}
-The treatment 
+There were two treatment groups in the study. The first treatment group received 150 cedis in cash and the other treatment group received 150 cedis in inventory, supplies, and tangible resources selected by the business owner.
 \color{black}
 
 4.	The authors note that their experimental design is very similar to an earlier study in Sri Lanka. What reasons do they give to conduct a separate study, rather than expecting the findings of that research to apply in this context? (2 points)
 
 
+\color{blue}
+
+\color{black}
 
 
 5.	The authors used a randomized control trial because they believed an observational analysis of similar policies would be insufficient. Imagine that another country implemented the investment program without randomizing treatment, and that you were trying to understand the effect of this program on food security in that country. What are two possible confounders (omitted variables) that would bias the results from your observational analysis? Explain the mechanism of the omitted variable and use the omitted variable bias formula to argue whether it would lead to an understatement or overstatement of the true effect. (3 points)
 
 
+\color{blue}
 
+\color{black}
 
 
 6.	Let $Y_{0i}$ be the business profits in the absence of the grants program and let $D_i = 1$ denote participation in the program. If there were no RCT and individuals were allowed to opt-in to the program, critics might point out that: (3 points)
@@ -79,7 +88,9 @@ The treatment
 
   Explain this equation in words, explain why it is a problem, and give a plausible scenario in which that may be the case. 
 
-
+\color{blue}
+This equation states that the expected profits for businesses who participated in the program had they not participated in the program is smaller than the expected profits for businesses who did not participate in the program. The reason that this is a problem is that it is impossible to observe this counterfactual. A plausible scenario in which this might be the case could be where businesses that financially struggle ar more likely to seek to participate in a grant program. 
+\color{black}
 
 
 7.	Defining treatment as being assigned to the grants program, what is the difference between the ITT and TOT in this context? Which do the authors report and why do they make this decision? Write an equation (using potential outcomes notation) that shows what the authors are trying to estimate. (3 points)
@@ -90,7 +101,7 @@ The difference between the ITT (Intent-to-Treat) and TOT (Treatment-on-the-Treat
 
 Fafchamps et al. report the ITT, as they aim to estimate the average effect of being assigned to the grants program, rather than just the effect of participating in the program.
 
-The equation showing what the authors are trying to estimate can be expressed as:
+The equation showing what the authors are trying to estimate can be expressed as (note that this is a simplification of the actual model the authors ran):
 
 \[Y_{it} = \beta_0 + D\beta_1 + \varepsilon_i\]
 
@@ -104,8 +115,7 @@ Hence the authors are estimating $\beta_1$, the average treatment effect of bein
 8.	At what level do the authors clustered their standard errors of the main results of the paper (if at all)? Briefly note why the authors cluster the standard errors and why this is the appropriate level to cluster at. (2 extra points)
 
 \color{blue}
-In the main results of their paper, the authors cluster their standard errors at the firm level. This is the appropriate level to cluster at 
-
+In the main results of their paper, the authors cluster their standard errors at the firm level. This is an appropriate level to cluster at given this is also the level of treatment (each firm is assigned to treatment or control).
 \color{black}
 
 
@@ -120,30 +130,63 @@ Looking at Table 2, the results of the balance test, I am made more confident ab
 10.	Attrition in experiments like this one is often a concern for internal validity. Does the particular sort of attrition mentioned in this article give you reason to be concerned about the validity in this study? Describe using particular aspects of the experiment or its implementation. (1 point)
 
 
-
+\color{blue}
+The particular sort of attrition mentioned in the article does not make me concerned about internal validity because the attrition is random.
+\color{black}
 
 11.	What other threats to internal validity may have affected this this experiment? Choose one threat and explain how it might bias the coefficient of interest. (2 points)
 
+\color{blue}
 
+\color{black}
 
 12.	Describe four specific problems involved with generalizing the results of this study as a result of using an RCT. Hint: review the Muralidharan and Niehaus (2017) or Banerjee et al. (2017) papers discussed in class.  (4 points)
 
+
+\color{blue}
+- Firms studied in this paper were microenterprises; this result may not generalize to medium-sized firms with employees 
+
+- Firms were studied in two geographies in Ghana. These results may not generalize to other countries that may have different entrepreneurial cultures.
+
+- Effects may differ if the government were to implement the program instead of researchers (e.g., maybe if entrepreneurs behave differently if they were given cash or in-kind grants from the government instead of as a “thank you” for completing a survey)
+
+- Study cannot be generalized for larger injections of cash or equipment 
+
+\color{black}
 
 13.	List at least two strategies the authors use to address some of the concerns you described above. (2 points)
 
 
 
+\color{blue}
+
+\color{black}
+
 
 14.	Why do the authors include Table 4? (2 extra points)
 
+\color{blue}
+To examine treatment effect heterogeneity across: gender mix of the industry that firms are in, high vs. low capture, initial capital stock and initial size of profits. From these results, the authors can conclude that in-kind grants only increase profits for female-owned firms that were larger initially. 
+\color{black}
 
 
 15.	Do you think the main results would be the same if this experiment were expanded to slightly larger businesses? Describe plausible scenarios in which providing the same transfer to these different businesses could both lead to (i) a larger increase in profits, and (ii) a smaller increase in profits. (2 extra points)
 
 
+\color{blue}
+
+\color{black}
+
+
 16.	If you were a researcher at the World Bank interested in scaling up one or several of these treatments, what follow-up study would you propose to expand on these findings? Explain in 4-5 sentences as if you were trying to convince a policymaker of the need for additional research. (2 extra points)
 
+
+\color{blue}
+
+\color{black}
+
 \newpage
+
 
 ## Data Analysis Questions (22 points + 2 extra points)
 
@@ -160,6 +203,7 @@ library(gtsummary)
 library(gridExtra)
 library(haven)
 library(labelled)
+library(ggsci)
 library(stargazer)
 library(lfe)
 ```
@@ -178,19 +222,24 @@ units <- length(unique(data$groupnum))
 
 baseline.control.mean <- round(mean(filter(data, wave==2, 
                                      assigntreat == 0)$realfinalprofit, na.rm=T),3)
-baseline.control.sd <- round(sd(filter(data, wave==2, 
-                                     assigntreat == 0)$realfinalprofit, na.rm=T),3)
+
+baseline.control.se <- round(sd(filter(data, wave==2, 
+                                     assigntreat == 0)$realfinalprofit,na.rm=T)/
+  sqrt(length(filter(data, wave==2, assigntreat == 0)$realfinalprofit) - 1), 3)
 
 baseline.control = paste(baseline.control.mean, 
-                         paste0(paste0('(', baseline.control.sd), ')'))
+                         paste0(paste0('(', baseline.control.se), ')'))
 
 baseline.treat.mean <- round(mean(filter(data, wave==2, 
                                    assigntreat == 1)$realfinalprofit, na.rm=T),3)
-baseline.treat.sd <- round(sd(filter(data, wave==2, 
-                                   assigntreat == 1)$realfinalprofit, na.rm=T),3)
+
+baseline.treat.se <- round(sd(filter(data, wave==2, 
+                                   assigntreat == 1)$realfinalprofit, na.rm=T)/
+  sqrt(length(filter(data, wave==2, assigntreat == 1)$realfinalprofit) - 1), 3)
+
 
 baseline.treat = paste(baseline.treat.mean, 
-                       paste0(paste0('(', baseline.treat.sd), ')'))
+                       paste0(paste0('(', baseline.treat.se), ')'))
 
 temp <- data.frame (`Country`  = country,
                     `N Firms` = num_obs,
@@ -206,8 +255,8 @@ knitr::kable(temp, align='cccccc',
                            "Households (N)",
                            "Geographies (N)",
                            "Randomization Units",
-                           "Control Profits Mean (SD)",
-                           "Treat Profits Mean (SD)"))
+                           "Control Profits Mean (SE)",
+                           "Treat Profits Mean (SE)"))
 ```
 
 
@@ -389,6 +438,54 @@ Residual Std. Error & 179.947 (df = 4145) & 118.839 (df = 4000) & 158.322 (df = 
 \vspace{1in}
 
 
+```{r, fig.width=8, fig.height=5}
+coefs_se_1 <- as.data.frame(summary(reg.1)$coefficients[ , c("Estimate", "Cluster s.e.")])
+coefs_se_1 <- rownames_to_column(coefs_se_1, "variable")
+
+coefs_se_2 <- as.data.frame(summary(reg.2)$coefficients[ , c("Estimate", "Cluster s.e.")])
+coefs_se_2 <- rownames_to_column(coefs_se_2, "variable")
+
+coefs_se_3 <- as.data.frame(summary(reg.3)$coefficients[ , c("Estimate", "Cluster s.e.")])
+coefs_se_3 <- rownames_to_column(coefs_se_3, "variable")
+
+coefs_se_4 <- as.data.frame(summary(reg.4)$coefficients[ , c("Estimate", "Cluster s.e.")])
+coefs_se_4 <- rownames_to_column(coefs_se_4, "variable")
+
+coefs_se_all <- rbind(coefs_se_1, coefs_se_2, coefs_se_3, coefs_se_4)
+coefs_se_all$reg <- rep(c('OLS Full', 'OLS Trimmed', 'FE Full', 'FE Trimmed'),
+                        each = nrow(coefs_se_1))
+
+coefs_se_all <- coefs_se_all %>%
+  mutate(variable = case_when(
+    variable == 'atreatcashfemale' ~ 'Cash Treatment*female',
+    variable == 'atreatequipfemale' ~ 'In-kind Treatment*female',
+    variable == 'atreatcashmale' ~ 'Cash Treatment*male',
+    variable == 'atreatequipmale' ~ 'In-kind Treatment*male'
+  ))
+
+ggplot(coefs_se_all, aes(x = variable, y = Estimate, color = variable)) + 
+  facet_wrap(~reg, nrow=2) + scale_color_nejm() + 
+  geom_pointrange(aes(ymin = Estimate - 1.96 * `Cluster s.e.`,
+                      ymax = Estimate + 1.96 * `Cluster s.e.`)) + 
+  geom_text(aes(label = paste(round(Estimate, 2), 
+                              paste0(paste0('(', round(`Cluster s.e.`,2), ')')))), 
+            hjust = -0.15, vjust = -0.5, size = 3) +
+  labs(title="Coefficient Plot of Table 3 Regressions\n") +
+  ylab("Coefficient Estimate") +
+  xlab("") + 
+  theme_bw() + theme_minimal() +
+  coord_flip() +
+  geom_hline(yintercept = 0, color = 'red', alpha = 0.1) +
+  theme(legend.position = "none", 
+        plot.title = element_text(
+        color = "black", 
+        size = 12, 
+        face = "bold",
+        margin = margin(t = 15),
+        hjust = 0.5) )
+```
+
+
 Try implementing the fixed effects specification either for question 18 or 19 above, and report your coefficients as a table or coefficient plot respectively. (2 extra points)	
 
 \color{blue}
@@ -409,7 +506,14 @@ Done
 21.	Propose a specific policy question that could best be answered using an RCT.  Explain the question in non-technical terms in no more than 3-5 sentences. Write out the empirical specification you would use. (4 points)
 
 \color{blue}
-Done
+A speciic policy question that could best be answered using an RCT would be-- what is the effect of free/reduced dental care on non dental-insured Medicare beneficiaries. To test this question, I would seek to enroll a large sample of Medicare beneficiaries who do not currently have dental insurance and randomize them into two arms: control arm where enrollees get gift cards for completing health surveys, and treatment group where they receive free/reduced dental care. 
+
+I would then estimate
+
+\[Y_{it} = \beta_0 + D\beta_1 + \varepsilon_i\]
+
+Where $Y_{it}$ is the potential outcome (health gains) of individual $i$ in wave $t$ if they were assigned to the dental program, $D$ is a binary variable indicating treatment assignment (1 if assigned to the dental program, 0 otherwise), $\beta_0$ is the average potential outcome in the control group, $\beta_1$ is the average treatment effect, and $\varepsilon_i$ is the error term.
+
 \color{black}
 
 22.	Describe your treatment group. Propose a comparison group and explain why you chose that group. (2 points)
