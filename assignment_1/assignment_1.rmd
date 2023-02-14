@@ -46,7 +46,7 @@ The primary research question that the authors are trying to answer is whether o
   a.	In 3-5 sentences (without copying the article abstract or the text): (2 points)
 
 \color{blue}
-The flypaper effect, which is a term used to describe the tendency of agents to keep money received instead of investing it, was found to exist among microenterprises in Ghana. THe main finding of the paper is that the form in which is grant is given (cash or in-kind) impacts microenterprise profits. The authors find that this finding is only statistically significant amonog women-owned enterprises who earned above-mean profits prior to the experiment.
+The flypaper effect, which is a term used to describe the tendency of agents to keep money received instead of investing it, was found to exist among microenterprises in Ghana. The main finding of the paper is that the form in which is grant is given (cash or in-kind) impacts microenterprise profits. The authors find that this finding is only statistically significant amonog women-owned enterprises who earned above-mean profits prior to the experiment.
 \color{black}
 
 
@@ -70,7 +70,7 @@ There were two treatment groups in the study. The first treatment group received
 
 
 \color{blue}
-
+The reasons that they give is that each country has a different history of involvement of women in business. In Ghana, women have similar labor force participation rates as men and are more likely to be self-employed, which was not true of Sri Lanka.
 \color{black}
 
 
@@ -78,6 +78,17 @@ There were two treatment groups in the study. The first treatment group received
 
 
 \color{blue}
+The omitted variable formula is given by: $\alpha_1= \beta_1+\beta_2\gamma_1$.
+
+Where $\alpha_1$ is the coefficient we recover from our regression, $\beta_1$ is the true coefficient, $\beta_2$ is the coefficient of the omitted variable in the "true" regression (aka the one without any omitted variables) and $\gamma_1$ is the coefficient on the variable of interest (treatment) in an auxiliary regression of the omitted variable on the variable of interest. 
+
+Without randomization, the two possible omitted variables are:
+
+- Business aptitude: Individuals who select into the treatment may have higher business aptitude (positive association between business aptitude and treatment $\gamma_1>0$). Since there is a positive association between business aptitude and food security ($\beta_2>0$), this would lead us to overestimate the true effect.
+
+
+- Existing food security: Individuals who select into the treatment may have pre-existing lower food security. Pre-existing food security would have a positive association with measured post-treatment food security ($\beta_2>0$). Since pre-existing food security would have a negative association with treatment ($\gamma_1<0$), this would lead us to understate the true effect. 
+
 
 \color{black}
 
@@ -131,34 +142,34 @@ Looking at Table 2, the results of the balance test, I am made more confident ab
 
 
 \color{blue}
-The particular sort of attrition mentioned in the article does not make me concerned about internal validity because the attrition is random.
+The attrition mentioned in this paper refers to the fact that only 730 of the original 793 firms who completed the first two waves answered the final wave survey. This does not give me reason to be concerned about internal validity of this experiment since it does not impact the pre-treatment randomization and the authors show robustness checks of main treatment effects to correct for attrition.
 \color{black}
 
 11.	What other threats to internal validity may have affected this this experiment? Choose one threat and explain how it might bias the coefficient of interest. (2 points)
 
 \color{blue}
-
+For those in the in-kind transfer arm of the treatment, it is possible that being part of this study induced a behavior change. This introduces a source of bias where the measured effect actually includes effects of being part of the study, conversing with research staff, etc. If we believe that that this led the subject to purchase equipment leading to higher profits, then this would cause us to overestimate the coefficient of interest. 
 \color{black}
 
 12.	Describe four specific problems involved with generalizing the results of this study as a result of using an RCT. Hint: review the Muralidharan and Niehaus (2017) or Banerjee et al. (2017) papers discussed in class.  (4 points)
 
 
 \color{blue}
-- Firms studied in this paper were microenterprises; this result may not generalize to medium-sized firms with employees 
+- Firms were studied in two geographies in Ghana, abd thus results may not generalize to other countries that may have different entrepreneurial cultures.
 
-- Firms were studied in two geographies in Ghana. These results may not generalize to other countries that may have different entrepreneurial cultures.
+- Effects may differ if the government were to implement the program instead of researchers 
 
-- Effects may differ if the government were to implement the program instead of researchers (e.g., maybe if entrepreneurs behave differently if they were given cash or in-kind grants from the government instead of as a “thank you” for completing a survey)
+- Firms studied in this paper were microenterprises; this result may not generalize to medium-sized or large-sized firms with more employees 
 
-- Study cannot be generalized for larger injections of cash or equipment 
+- Study cannot be generalized for larger sum of cash or equipment 
 
 \color{black}
 
 13.	List at least two strategies the authors use to address some of the concerns you described above. (2 points)
 
 
-
 \color{blue}
+The authors picked two different geographies in Ghana in which to run their experiments. One was a large city and the other was an industrial city. This helps mitigate point 1 above. The authors also separately examined high vs. low initial profit firms. This helps indicate what it may look like to generalize for larger injections of transfers.
 
 \color{black}
 
@@ -166,7 +177,7 @@ The particular sort of attrition mentioned in the article does not make me conce
 14.	Why do the authors include Table 4? (2 extra points)
 
 \color{blue}
-To examine treatment effect heterogeneity across: gender mix of the industry that firms are in, high vs. low capture, initial capital stock and initial size of profits. From these results, the authors can conclude that in-kind grants only increase profits for female-owned firms that were larger initially. 
+The authors include Table 4 to examine treatment effect heterogeneity across gender mix of the industry that firms are in, high versus low capture, initial capital stock, and initial size of profits. From these results the authors are able to draw their conclusion that in-kind grants only increase profits for female-owned firms that were larger initially. 
 \color{black}
 
 
@@ -174,6 +185,9 @@ To examine treatment effect heterogeneity across: gender mix of the industry tha
 
 
 \color{blue}
+- If owners of larger businesses have very good business acumen and would use grants (either given in cash or in-kind) to engage in profitable capital investments, the result would be a larger increase in profits for both types of treatment.
+
+- If larger businesses have largely hit their steady-state capital stock levels and neither a cash nor in-kind grant would have significant positive impacts on profits, the result would be a smaller increase in profits for both types of treatment 
 
 \color{black}
 
@@ -182,7 +196,7 @@ To examine treatment effect heterogeneity across: gender mix of the industry tha
 
 
 \color{blue}
-
+As a researcher at the World Bank, I would propose a further examination of the efficacy of both cash transfers and in-kind transfers for medium-sized businesses. If in-kind transfers are found to be effective for larger businesses, then this could support the use of equipment transfers in lending programs for businesses of varying sizes. However, if cash transfers are deemed more suitable for larger companies, this would avoid overgeneralizing the current findings and help ensure that lending programs result in better outcomes for businesses of all sizes in developing countries.
 \color{black}
 
 \newpage
@@ -499,7 +513,6 @@ Done (see FE regression in 18 and 19)
 \color{blue}
 Done
 \color{black}
-\newpage
 
 ## RCTs in Your Own Work (8 points)
 
@@ -519,7 +532,7 @@ Where $Y_{it}$ is the potential outcome (health gains) of individual $i$ in wave
 22.	Describe your treatment group. Propose a comparison group and explain why you chose that group. (2 points)
 
 \color{blue}
-My treatment group would be recruited patients that have been randomized to the free/reduced dental care arm of the experiment. The comparison group would be those that were randomized to the control arm. This comparison makes sense because after randomization, the two groups should be balanced on characteristics that impact overall health.
+My treatment group would be non-dental insured Medicare beneficiaries that have been recruited and randomized to the free/reduced dental care arm of the experiment. The comparison group would be those that were randomized to the control arm. This comparison makes sense because after randomization, the two groups should be balanced on characteristics that impact overall health.
 \color{black}
 
 

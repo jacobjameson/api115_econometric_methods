@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.9)  11 FEB 2023 14:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.13)  13 FEB 2023 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -489,80 +489,79 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/Users/jacob/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 289.
+(Font)              <10> on input line 286.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 289.
+(Font)              <7> on input line 286.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 289.
-[2]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 444.
+(Font)              <5> on input line 286.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 299.
 (/Users/jacob/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [3] [4]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 550.
+) [2] [3] [4] [5]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 616.
 (/Users/jacob/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 559.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 625.
 (/Users/jacob/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [5]
-Overfull \hbox (5.99892pt too wide) in paragraph at lines 613--614
+) [6]
+Overfull \hbox (5.99892pt too wide) in paragraph at lines 679--680
  []\T1/lmr/m/n/10 Counry 
  []
 
 
-Overfull \hbox (9.06903pt too wide) in paragraph at lines 627--627
+Overfull \hbox (9.06903pt too wide) in paragraph at lines 693--693
 []|\T1/lmr/m/n/10 Ghana|  
  []
 
 
-Overfull \hbox (2.42926pt too wide) in paragraph at lines 627--627
+Overfull \hbox (2.42926pt too wide) in paragraph at lines 693--693
  []|\T1/lmr/m/n/10 Ghana| 
  []
 
-[6]
-Overfull \hbox (33.55151pt too wide) in paragraph at lines 766--789
- [][] 
- []
-
 [7]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 837.
-
-Overfull \hbox (60.66217pt too wide) in paragraph at lines 866--895
+Overfull \hbox (33.55151pt too wide) in paragraph at lines 832--855
  [][] 
  []
 
 [8]
-Underfull \vbox (badness 10000) detected at line 946
- []
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 903.
 
-
-Overfull \vbox (2.12608pt too high) detected at line 946
+Overfull \hbox (60.66217pt too wide) in paragraph at lines 932--961
+ [][] 
  []
 
 [9]
-<assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf, id=95, 578.16pt x 361.35pt>
+Underfull \vbox (badness 10000) detected at line 1012
+ []
+
+
+Overfull \vbox (2.12608pt too high) detected at line 1012
+ []
+
+[10]
+<assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf, id=99, 578.16pt x 361.35pt>
 File: assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf  used on input line 948.
+Package pdftex.def Info: assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf  used on input line 1014.
 (pdftex.def)             Requested size: 469.75385pt x 293.59616pt.
-[10 <./assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf>] [11] [12] (./assignment_1.aux)
+[11 <./assignment_1_files/figure-latex/unnamed-chunk-6-1.pdf>] [12] (./assignment_1.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
  12122 strings out of 477989
- 189776 string characters out of 5838710
+ 189776 string characters out of 5838709
  1870346 words of memory out of 5000000
  32047 multiletter control sequences out of 15000+600000
  557464 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 89i,10n,90p,708b,525s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on assignment_1.pdf (12 pages, 293989 bytes).
+ 89i,10n,90p,708b,505s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/Users/jacob/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/jacob/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on assignment_1.pdf (12 pages, 297437 bytes).
 PDF statistics:
  221 PDF objects out of 1000 (max. 8388607)
  172 compressed objects within 2 object streams
