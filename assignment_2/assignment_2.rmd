@@ -1,7 +1,7 @@
 ---
-title: "PROBLEM SET 1"
+title: "PROBLEM SET 2"
 author: "Jacob Jameson"
-date: "Due on Tuesday, February 14, 2023"
+date: "Due on Tuesday March 7, 2023"
 output: pdf_document
 ---
     
@@ -30,174 +30,102 @@ I certify that my work in this problem set complies with the Harvard Kennedy Sch
 
 
 
-### Conceptual Questions (30 points + 8 extra points)
+### Conceptual Questions 
 
 
-1.	Read the paper. Clearly state the primary research question that the authors are trying to answer. What makes this an interesting question? (2 points)
+1.	Read the paper. In a couple of sentences, explain the primary research question that the authors are trying to answer. What is the key logic behind the authors' answer? In a separate sentence, explain why policymakers should care about that question. Use non-technical jargon so that someone without statistical training could understand.
 
-\color{blue}
-The primary research question that the authors are trying to answer is whether or not capital in the form of in-kind grants such as inventory, supplies, and tangible resources -- or cash is more effective in spurring economic growth for male and female owned organizations. The reason that this is an interesting question is because standard models of investment state that for credit-constrained it should not matter whether or not the firm is receiving capital in the form of cash or in-kind grants, either should lead to the same increase in growth.
-\color{black}
 
 
-2.	Explain the main finding of the paper (including what the ‘flypaper effect’ is) using non-technical jargon, as if you were writing a brief policy memo.  Provide two versions:
+2.	The authors used an instrumental variable approach because they believed a naïve observational regression specification (regressing earnings on education) would be insufficient. What are two possible confounders (omitted variables) that would bias the results from this regression? Explain the mechanism of the omitted variable and use the omitted variable bias formula to argue whether it would lead to an understatement or overstatement of the true effect.
 
 
-  a.	In 3-5 sentences (without copying the article abstract or the text): (2 points)
 
-\color{blue}
-The flypaper effect, which is a term used to describe the tendency of agents to keep money received instead of investing it, was found to exist among microenterprises in Ghana. The main finding of the paper is that the form in which is grant is given (cash or in-kind) impacts microenterprise profits. The authors find that this finding is only statistically significant amonog women-owned enterprises who earned above-mean profits prior to the experiment.
-\color{black}
 
 
+3.	What is/are the instrument(s) used by the authors in this study, and what are those instruments instrumenting for?
 
-  b.	In a tweet, i.e. 280 characters or less: (1 point)
 
-\color{blue}
 
-In-kind grants are better for profit growth than cash grants, especially among female-owned enterprises who earned above-mean profits prior to the experiment in Ghana.
+4.	Generally, what characteristics must an instrument have for it to be considered valid? 
 
-\color{black}
 
+a.	Explain these characteristics in words, and specific terms of the instrument(s) used in the paper.
 
-3.	Summarize the specific details of the treatment that participating businesses in this country underwent. (2 points)
 
-\color{blue}
-There were two treatment groups in the study. The first treatment group received 150 cedis in cash and the other treatment group received 150 cedis in inventory, supplies, and tangible resources selected by the business owner.
-\color{black}
+b.	Explain these characteristics using random variables and potential outcomes. 
 
-4.	The authors note that their experimental design is very similar to an earlier study in Sri Lanka. What reasons do they give to conduct a separate study, rather than expecting the findings of that research to apply in this context? (2 points)
 
 
-\color{blue}
-The reasons that they give is that each country has a different history of involvement of women in business. In Ghana, women have similar labor force participation rates as men and are more likely to be self-employed, which was not true of Sri Lanka.
-\color{black}
 
+5.	Do you believe that the instrument(s) in the paper is/are truly exogenous? Why or why not? If so, provide a brief argument for this assumption. If not, provide an alternate mechanism for how the exogeneity assumption may be violated. 
 
-5.	The authors used a randomized control trial because they believed an observational analysis of similar policies would be insufficient. Imagine that another country implemented the investment program without randomizing treatment, and that you were trying to understand the effect of this program on food security in that country. What are two possible confounders (omitted variables) that would bias the results from your observational analysis? Explain the mechanism of the omitted variable and use the omitted variable bias formula to argue whether it would lead to an understatement or overstatement of the true effect. (3 points)
 
 
-\color{blue}
-The omitted variable formula is given by: $\alpha_1= \beta_1+\beta_2\gamma_1$.
 
-Where $\alpha_1$ is the coefficient we recover from our regression, $\beta_1$ is the true coefficient, $\beta_2$ is the coefficient of the omitted variable in the "true" regression (aka the one without any omitted variables) and $\gamma_1$ is the coefficient on the variable of interest (treatment) in an auxiliary regression of the omitted variable on the variable of interest. 
 
-Without randomization, the two possible omitted variables are:
 
-- Business aptitude: Individuals who select into the treatment may have higher business aptitude (positive association between business aptitude and treatment $\gamma_1>0$). Since there is a positive association between business aptitude and food security ($\beta_2>0$), this would lead us to overestimate the true effect.
+6.	To assess whether the instrument is relevant, we can examine whether the instrument (quarter of birth) predicts the instrumentalized variable (compulsory schooling). In the following parts a - c, provide interpretations with concrete units, in a way a policymaker can understand.
 
+a.	Explain how Table 1 is constructed, and give some intuition for the authors' choices.
+ 
 
-- Existing food security: Individuals who select into the treatment may have pre-existing lower food security. Pre-existing food security would have a positive association with measured post-treatment food security ($\beta_2>0$). Since pre-existing food security would have a negative association with treatment ($\gamma_1<0$), this would lead us to understate the true effect. 
+b.	Interpret the coefficient of the first quarter for the outcome variables "Total years of education" and "High school graduate" of the 1930-1939 cohort.
 
 
-\color{black}
+c.	Why do the authors estimate coefficients for the bottom part of Table 1 ("College graduate", "Completed master’s degree", "Completed doctoral degree")? How do the results support the validity of their instrument? What assumption of the IV model are they addressing here?
 
 
-6.	Let $Y_{0i}$ be the business profits in the absence of the grants program and let $D_i = 1$ denote participation in the program. If there were no RCT and individuals were allowed to opt-in to the program, critics might point out that: (3 points)
 
-\[E(Y_{0i}|D_i = 1) < E(Y_{0i}| D_i = 0)\]
+7.	Consider Table III and Table IV. Provide a general formula and a basic intuition for the Wald estimator. How does it compare to the OLS estimate? What is the advantage of using TSLS?
 
-  Explain this equation in words, explain why it is a problem, and give a plausible scenario in which that may be the case. 
 
-\color{blue}
-This equation states that the expected profits for businesses who participated in the program had they not participated in the program is smaller than the expected profits for businesses who did not participate in the program. The reason that this is a problem is that it is impossible to observe this counterfactual. A plausible scenario in which this might be the case could be where businesses that financially struggle ar more likely to seek to participate in a grant program. 
-\color{black}
+8.	How would you construct a reduced form table? What would be the purpose thereof? What figure in the paper fulfills this purpose?
 
 
-7.	Defining treatment as being assigned to the grants program, what is the difference between the ITT and TOT in this context? Which do the authors report and why do they make this decision? Write an equation (using potential outcomes notation) that shows what the authors are trying to estimate. (3 points)
 
-\color{blue}
+9.	Subsequent papers have found the instrument to be weak for some specifications of the paper. 
 
-The difference between the ITT (Intent-to-Treat) and TOT (Treatment-on-the-Treated) is as that the ITT estimates the average treatment effect among all individuals who were randomly assigned to the grants program, regardless of whether they actually received the treatment (participation in the program) or not, where the TOT estimates the average treatment effect among only those individuals who actually received the treatment (participated in the program).
 
-Fafchamps et al. report the ITT, as they aim to estimate the average effect of being assigned to the grants program, rather than just the effect of participating in the program.
+a.	Provide an intuition for the reason why weak instruments are problematic.
 
-The equation showing what the authors are trying to estimate can be expressed as (note that this is a simplification of the actual model the authors ran):
 
-\[Y_{it} = \beta_0 + D\beta_1 + \varepsilon_i\]
+b.	Read the following, explain the intuition, and explain the implications for weak instruments.
 
-Where $Y_{it}$ is the potential outcome (profits) of individual $i$ in wave $t$ if they were assigned to the grants program, $D$ is a binary variable indicating treatment assignment (1 if assigned to the grants program, 0 otherwise), $\beta_0$ is the average potential outcome in the control group, $\beta_1$ is the average treatment effect, and $\varepsilon_i$ is the error term.
 
-Hence the authors are estimating $\beta_1$, the average treatment effect of being assigned to the grants program on the potential outcome $Y_{it}$.
 
 
-\color{black}
+c.	Optional: if you know what the bootstrap does, why does bootstrapping not solve the weak identification issue?
 
-8.	At what level do the authors clustered their standard errors of the main results of the paper (if at all)? Briefly note why the authors cluster the standard errors and why this is the appropriate level to cluster at. (2 extra points)
 
-\color{blue}
-In the main results of their paper, the authors cluster their standard errors at the firm level. This is an appropriate level to cluster at given this is also the level of treatment (each firm is assigned to treatment or control).
-\color{black}
 
+10.	If you were to write the paper today, how would you detect weak instruments, and what statistic would you use for inference?
 
+Hint: you may want to refer to Andrews, Stock and Sun (2019).
 
-9.	To assess whether treatment was actually randomly assigned, we can examine the results of a balance test, presented in Table 2. Do the results in this table make you more or less confident about the validity of the paper’s results? Interpret one of the p-values from column (5). (3 points)
+a.	How is the effective F-statistic constructed?
 
 
-\color{blue}
-Looking at Table 2, the results of the balance test, I am made more confident about the results that estimate using the full sample, but the trimmed sample seems less balanced (especially on baseline profits). That poor balance makes me skeptical of results that come from estimates on the trimmed sample. In the full sample, the p-value corresponding to the F-test of equality of means across the three groups is 0.985 for baseline profits, which indicates that we cannot reject the null hypothesis that the means are equal.
-\color{black}
+b.	How are Anderson-Rubin confidence sets constructed?
 
-10.	Attrition in experiments like this one is often a concern for internal validity. Does the particular sort of attrition mentioned in this article give you reason to be concerned about the validity in this study? Describe using particular aspects of the experiment or its implementation. (1 point)
 
+### The Local Average Treatment Effect
 
-\color{blue}
-The attrition mentioned in this paper refers to the fact that only 730 of the original 793 firms who completed the first two waves answered the final wave survey. This does not give me reason to be concerned about internal validity of this experiment since it does not impact the pre-treatment randomization and the authors show robustness checks of main treatment effects to correct for attrition.
-\color{black}
+11.	Explain the monotonicity assumption in the context of this study. What is required regarding the relationship between variables for monotonicity to be met, and is it reasonable to assume that defiers do not exist? In your explanation, be sure to touch on what does it means to be a defier in this study.
 
-11.	What other threats to internal validity may have affected this this experiment? Choose one threat and explain how it might bias the coefficient of interest. (2 points)
 
-\color{blue}
-For those in the in-kind transfer arm of the treatment, it is possible that being part of this study induced a behavior change. This introduces a source of bias where the measured effect actually includes effects of being part of the study, conversing with research staff, etc. If we believe that that this led the subject to purchase equipment leading to higher profits, then this would cause us to overestimate the coefficient of interest. 
-\color{black}
+12.	Interpret the IV estimates in Table IV with appropriate units in the context of the study’s research question, treating them as a local average treatment effect. In your interpretation, clarify the population for which this local average treatment effect is identified (i.e., who are the compliers?).
 
-12.	Describe four specific problems involved with generalizing the results of this study as a result of using an RCT. Hint: review the Muralidharan and Niehaus (2017) or Banerjee et al. (2017) papers discussed in class.  (4 points)
 
 
-\color{blue}
-- Firms were studied in two geographies in Ghana, abd thus results may not generalize to other countries that may have different entrepreneurial cultures.
 
-- Effects may differ if the government were to implement the program instead of researchers 
 
-- Firms studied in this paper were microenterprises; this result may not generalize to medium-sized or large-sized firms with more employees 
+13.	With 3-5 sentences, discuss the how you believe these results inform policy outside of the specified context.  In your discussion, be sure to touch on the problems specific to generalizing from instrumental variable findings and the particular scope conditions of this paper’s findings.
 
-- Study cannot be generalized for larger sum of cash or equipment 
 
-\color{black}
 
-13.	List at least two strategies the authors use to address some of the concerns you described above. (2 points)
 
 
-\color{blue}
-The authors picked two different geographies in Ghana in which to run their experiments. One was a large city and the other was an industrial city. This helps mitigate point 1 above. The authors also separately examined high vs. low initial profit firms. This helps indicate what it may look like to generalize for larger injections of transfers.
-
-\color{black}
-
-
-14.	Why do the authors include Table 4? (2 extra points)
-
-\color{blue}
-The authors include Table 4 to examine treatment effect heterogeneity across gender mix of the industry that firms are in, high versus low capture, initial capital stock, and initial size of profits. From these results the authors are able to draw their conclusion that in-kind grants only increase profits for female-owned firms that were larger initially. 
-\color{black}
-
-
-15.	Do you think the main results would be the same if this experiment were expanded to slightly larger businesses? Describe plausible scenarios in which providing the same transfer to these different businesses could both lead to (i) a larger increase in profits, and (ii) a smaller increase in profits. (2 extra points)
-
-
-\color{blue}
-- If owners of larger businesses have very good business acumen and would use grants (either given in cash or in-kind) to engage in profitable capital investments, the result would be a larger increase in profits for both types of treatment.
-
-- If larger businesses have largely hit their steady-state capital stock levels and neither a cash nor in-kind grant would have significant positive impacts on profits, the result would be a smaller increase in profits for both types of treatment 
-
-\color{black}
-
-
-16.	If you were a researcher at the World Bank interested in scaling up one or several of these treatments, what follow-up study would you propose to expand on these findings? Explain in 4-5 sentences as if you were trying to convince a policymaker of the need for additional research. (2 extra points)
-
-
-\color{blue}
-As a researcher at the World Bank, I would propose a further examination of the efficacy of both cash transfers and in-kind transfers for medium-sized businesses. If in-kind transfers are found to be effective for larger businesses, then this could support the use of equipment transfers in lending programs for businesses of varying sizes. However, if cash transfers are deemed more suitable for larger companies, this would avoid overgeneralizing the current findings and help ensure that lending programs result in better outcomes for businesses of all sizes in developing countries.
-\color{black}
 
 \newpage
 
@@ -205,343 +133,226 @@ As a researcher at the World Bank, I would propose a further examination of the 
 ## Data Analysis Questions (22 points + 2 extra points)
 
 
-17.	Produce a well-organized descriptive statistics table that includes (i) the number of households, (ii) the number of geographic units, (iii) the number of units of randomization, alongside (iv) the sample mean and standard error of the income and revenue index in the control group, and (v) the same sample mean and standard error of the same index but in the treatment group. In other words, the table should have one row (countries), and six columns (including country).  
+14.	Figure I can be thought of as a "graphical first-stage", as it shows the mean of completed years of education by quarter of birth for each year of birth between 1930 and 1940. Replicate Figure I. You can highlight the mean of years of education of those born in the first quarter (for each year between 1930 and 1940). 
+
+Hint: you may want to create year of birth and quarter of birth dummies. They will also be useful for the following questions.
 
 
-  a.	Print your table below. (6 points)
- 
+
 ```{r, message=F, echo=F}
 library(tidyverse)
 library(foreign)
-library(gtsummary)
+library(lmtest)
 library(gridExtra)
 library(haven)
 library(labelled)
 library(ggsci)
+library(sandwich)
 library(stargazer)
+library(kableExtra)
+library(AER)
 library(lfe)
+library(purrr)
+library(broom)
+library(knitr)
 ```
 
 ```{r, message=F, warning=F}
-data <- read_dta("data/ReplicationDataGhanaJDE.dta")
+data <- read_dta("data/AK91_1930_39.dta") %>%
+  filter(YOB <= 39)
 
-num_obs <- data %>% 
-  filter(wave == 2) %>% 
-  mutate(count = sum(experimentsample)) %>%
-  select(count)
-num_obs <- num_obs[[1]][1]
-
-country <- 'Ghana'
-units <- length(unique(data$groupnum))
-
-baseline.control.mean <- round(mean(filter(data, wave==2, 
-                                     assigntreat == 0)$realfinalprofit, na.rm=T),3)
-
-baseline.control.se <- round(sd(filter(data, wave==2, 
-                                     assigntreat == 0)$realfinalprofit,na.rm=T)/
-  sqrt(length(filter(data, wave==2, assigntreat == 0)$realfinalprofit) - 1), 3)
-
-baseline.control = paste(baseline.control.mean, 
-                         paste0(paste0('(', baseline.control.se), ')'))
-
-baseline.treat.mean <- round(mean(filter(data, wave==2, 
-                                   assigntreat == 1)$realfinalprofit, na.rm=T),3)
-
-baseline.treat.se <- round(sd(filter(data, wave==2, 
-                                   assigntreat == 1)$realfinalprofit, na.rm=T)/
-  sqrt(length(filter(data, wave==2, assigntreat == 1)$realfinalprofit) - 1), 3)
-
-
-baseline.treat = paste(baseline.treat.mean, 
-                       paste0(paste0('(', baseline.treat.se), ')'))
-
-temp <- data.frame (`Country`  = country,
-                    `N Firms` = num_obs,
-                    `N Geographical Units` = 2,
-                    `Units of Randomization` = units,
-                    `Control Profits` = baseline.control,
-                    `Treat Profits` = baseline.treat)
-
-row.names(temp) <- 'Ghana'
-
-knitr::kable(temp, align='cccccc',
-             col.names = c("Counry",
-                           "Households (N)",
-                           "Geographies (N)",
-                           "Randomization Units",
-                           "Control Profits Mean (SE)",
-                           "Treat Profits Mean (SE)"))
-```
-
-
-  b.	Are the differences in baseline profits between the control and treatment groups significant at the 0.05 level? (3 points)
-
-```{r, message=F, warning=F}
-data <- data %>%
-  filter(experimentsample == 1) %>%
-   mutate(`Study Arm` = case_when(
-     cashtreat == 1 ~ 0,
-     equiptreat == 1 ~ 1,
-     assigntreat == 0 ~ 2), 
-     `Study Arm` = recode_factor(`Study Arm`, 
-                                 "0" = "Cash", 
-                                 "1" = "In-kind",
-                                 "2" = 'Control')) %>%
-  arrange(sheno, questionnaire_date)
-
-data$baseline_profit <- data$realfinalprofit
-var_label(data$baseline_profit) <- "Baseline Profit"
+data$QOB <- as.factor(data$QOB) 
 
 data %>%
-  filter(wave == 2) %>% 
-  select(baseline_profit, `Study Arm`) %>%
-  tbl_summary(by = `Study Arm`, type = all_continuous() ~ "continuous2",
-              statistic = all_continuous() ~ c("{mean} ({sd})"),
-              missing_text = "(Missing)") %>% 
-  add_p(pvalue_fun = ~style_pvalue(.x, digits = 2),
-        test = list(all_continuous() ~ "aov")) %>%
-  add_overall() %>% 
-  modify_header(label ~ "**Variable**") %>%
-  modify_caption("**Balance Test for Baseline Profits**") %>%
-  bold_labels()
+  group_by(YOB, QOB) %>%
+  summarise(mean.EDUC = mean(EDUC), 
+            quarter.year = YOB + (as.numeric(QOB)/4) - 0.25) %>%
+  ungroup() %>%
+  unique() %>%
+ggplot(aes(x = quarter.year, y = mean.EDUC)) +
+  geom_path() +
+  geom_point(aes(color=QOB), size = 3) + 
+  geom_text(aes(label = paste(QOB)),
+          vjust = 2.5, size = 3) +
+  scale_x_continuous(breaks = seq(30, 40, by = 2)) +
+  scale_y_continuous(breaks = seq(12.2, 13.2, by = .2)) +
+  scale_color_manual(values = c("red", "black", "black", "black")) +
+  labs(x = "Year of Birth", y = "Years of Completed Education",
+       title = "Relationship between birth year and years of education",
+       caption = paste("Figure I\n",
+       "Years of Education and Season of Birth 1980 Census \n",
+       "Note: Quarter of birth is listed below each observation")) +
+  theme_classic() + 
+  theme(plot.caption = element_text(
+    color = "black", 
+    size = 8,
+    lineheight = 1.2, 
+    hjust = 0.5,
+    margin = margin(t = 20)),
+    legend.position = "none")
 ```
-
-\color{blue}
-There are no observable differences in baseline profits between the control and treatment groups. Using an ANOVA test we can see that the difference are not significant at the 0.05 level. This table matches the results in Table 2 by Fafchamps et. all.
-\color{black}
-
 
 \newpage
 
-18.	Reproduce the coefficient estimate and standard error estimates in columns (1-2) of Table 3: these correspond to the main pooled OLS specifications (Equation 5 in the paper) without and with sample trimming respectively. (3 points)
+15.	Table I shows the relationship between quarter of birth and educational outcomes. Replicate the first row of Table I, i.e., find the coefficients of the first, second, and third quarter-of-birth dummies on total years of education. Your estimates do not need to be exactly the same as in the paper, but roughly of the same magnitude.
 
-```{r, results='hide'}
-reg1 <- felm(realfinalprofit ~ atreatcash + atreatequip |groupnum + wave|0|sheno, 
-             data)
 
-reg2 <- felm(realfinalprofit ~ atreatcash + atreatequip|groupnum + wave |0|sheno,
-             filter(data, is.na(trimgroup)))
+```{r, warning=F, message=F}
+data <- within(data, QOB <- relevel(QOB, ref = 4))
 
-fe.reg1 <- felm(realfinalprofit ~ atreatcash + atreatequip |groupnum + 
-               wave + sheno|0|sheno, data)
+ols <- tidy(lm(formula = paste0('EDUC', " ~ QOB"), data = data))
 
-fe.reg2 <- felm(realfinalprofit ~ atreatcash + atreatequip|groupnum + 
-               wave + sheno |0|sheno,filter(data, is.na(trimgroup)))
+table <- data.frame(
+    `Outcome variable` = character(),
+    `Birth cohort` = character(),
+    Mean = double(),
+    I = double(),
+    II = double(),
+    III = double(),
+    `F-test` = character())
 
-stargazer(reg1, reg2, fe.reg1, fe.reg2, 
-          type = "latex", title = 'Main Treatment Effects',
-          column.labels = c('OLS Full', 
-                            'OLS Trimmed', 
-                            'FE Full','FE Trimmed'), 
-          dep.var.labels = 'Real monthly profits (cedi)',
-          covariate.labels = c('Cash Treatment', 'In-kind Treatment'),
-          style = 'qje')
+table <- rbind(table, data.frame(
+    `Outcome variable` = 'Total years of Education',
+    `Birth cohort` = '1930-1939',
+    Mean = round(mean(data$EDUC, na.rm = TRUE), 3),
+    I = paste(round(ols$estimate[2], 3),
+              paste0('(',round(ols$std.error[2], 3)),')'),
+    II = paste(round(ols$estimate[3], 3), 
+                paste0('(',round(ols$std.error[2], 3)),')'),
+    III = paste(round(ols$estimate[4], 3), 
+                 paste0('(',round(ols$std.error[2], 3)), ')'),
+    `F-test` = summary(lm(formula = paste0('EDUC', " ~ QOB"), 
+                          data = data))$fstat[[1]]))
+
+kable(
+    table, 
+    caption = "Quarter-of-birth effect", 
+    align = "c", 
+    col.names = c("Outcome Variable", "Birth Cohort", 
+                  "Mean", "I", "II", "III", "F-test")) 
 ```
-\begin{table}[!htbp] \centering 
-  \caption{Main Treatment Effects} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-\\[-1.8ex] & \multicolumn{4}{c}{Real monthly profits (cedi)} \\ 
- & OLS Full & OLS Trimmed & FE Full & FE Trimmed \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-\hline \\[-1.8ex] 
- Cash Treatment & 14.503$^{*}$ & 9.589 & 3.962 & 0.482 \\ 
-  & (8.679) & (7.318) & (13.882) & (8.223) \\ 
-  & & & & \\ 
- In-kind Treatment & 38.597$^{***}$ & 36.752$^{***}$ & 43.227$^{***}$ & 30.873$^{***}$ \\ 
-  & (11.206) & (10.670) & (12.306) & (10.725) \\ 
-  & & & & \\ 
-\textit{N} & 4,354 & 4,203 & 4,354 & 4,203 \\ 
-R$^{2}$ & 0.277 & 0.327 & 0.520 & 0.616 \\ 
-Adjusted R$^{2}$ & 0.242 & 0.294 & 0.379 & 0.503 \\ 
-Residual Std. Error & 180.116 (df = 4152) & 118.825 (df = 4007) & 163.066 (df = 3361) & 99.698 (df = 3244) \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Notes:} & \multicolumn{4}{r}{$^{***}$Significant at the 1 percent level.} \\ 
- & \multicolumn{4}{r}{$^{**}$Significant at the 5 percent level.} \\ 
- & \multicolumn{4}{r}{$^{*}$Significant at the 10 percent level.} \\ 
-\end{tabular} 
-\end{table} 
 
-\newpage
 
-19.	Represent the values of column (5), rows 3 onward in Table 3 as a well-labeled coefficient plot. This corresponds to the main (untrimmed) OLS analysis finding treatment effects by gender and treatment type (Equation 6 in the paper). The figure must: (6 points)
 
-- Print the rounded coefficients and standard errors next to each point.
-- Define and use your own function for at least one part to avoid repetition.
-- Be estimated from the regression specification described in the paper. Therefore, all the numbers should match exactly as reported in Table 3. 
-- Be clean and well-labeled (i.e., have clear axis labels, no chartjunk, understandable to a reader who has not read the paper).
- 
-```{r, results='hide'}
-outcome <- "realfinalprofit"
 
-vars <- c("atreatcashfemale", "atreatequipfemale", 
-          "atreatcashmale", "atreatequipmale")
+16.	Create a reduced form table. In other words, you want to regress the log of weekly earnings on the quarter of birth dummies (our instrument).  You may want to include year fixed effect.
 
-fe_1 <- ("groupnum + wave + wave2_female + 
-         wave3_female + wave4_female + wave5_female + wave6_female")
 
-fe_2 <- ("groupnum + sheno + wave + wave2_female + 
-         wave3_female + wave4_female + wave5_female + wave6_female")
 
-iv <- "0"
-cluster <- "sheno"
+```{r}
+reg.reduced.form <- felm(QOB ~ LWKLYWGE|0|0|0,data)
 
-# helper function to create formula
-helper <- function(outcome, vars, fe, iv, cluster) {
-  as.formula(
-    paste(paste(paste(outcome, ' ~ '), paste(vars, collapse = ' + ')),
-          fe, iv, cluster, sep = ' | ')
+reg.reduced.form.fe <- felm(QOB ~ LWKLYWGE|YOB|0|0,data)
+```
+
+
+
+
+17.	Table III reports OLS and Wald estimates of returns of education. Replicate both estimates for men born 1930-1939 (Panel B). 
+
+
+
+
+```{r}
+data$QOB_dummy <- ifelse(data$QOB == 1, 1, 0)
+wage_1st <- data %>% filter(QOB == 1) %>% summarise(mean(LWKLYWGE))
+wage_other <- data %>% filter(QOB != 1) %>% summarise(mean(LWKLYWGE))
+wage_diff <- wage_1st - wage_other
+
+wage_err <- sqrt(
+sum(data %>% filter(QOB == 1) %>% summarise(sd(LWKLYWGE)^2),
+    data %>% filter(QOB != 1) %>% summarise(sd(LWKLYWGE)^2))
+)
+
+educ_1st <- data %>% filter(QOB == 1) %>% 
+  summarise(mean(EDUC))
+
+educ_other <- data %>% filter(QOB != 1) %>% 
+  summarise(mean(EDUC))
+
+educ_diff <- educ_1st - educ_other
+
+educ_err <- sqrt(
+sum(data %>% filter(QOB == 1) %>% summarise(sd(EDUC)^2),
+    data %>% filter(QOB != 1) %>% summarise(sd(EDUC)^2))
+)
+
+# wald return to education
+data$EDUC_pred <- lm(EDUC ~ QOB_dummy, data = data) %>% predict()
+wald_rslt <- lm(LWKLYWGE ~ EDUC_pred, data = data)
+
+# ols return to education
+ols_rslt <- lm(LWKLYWGE ~ EDUC, data = data)
+
+wald_est = coef(wald_rslt)["EDUC_pred"]
+wald_err = sqrt(diag(vcovHC(wald_rslt, type = "HC1"))["EDUC_pred"])
+ols_est = coef(ols_rslt)["EDUC"]
+ols_err = sqrt(diag(vcovHC(ols_rslt, type = "HC1"))["EDUC"])
+
+# create table
+table <- data.frame(
+    Variable = c("ln (wkly. wage)", "", 
+                 "Education", "",
+                 "Wald est. of return to education", "", 
+                 "OLS return to education", ""),
+    `(1) Born in 1st quarter of year` = 
+      c(round(wage_1st$`mean(LWKLYWGE)`,5), "", 
+        round(educ_1st$`mean(EDUC)`,5), "", 
+        "", "", 
+        "", ""),
+    `(2) Born in 2nd, 3rd, or 4th quarter of year` = 
+      c(round(wage_other$`mean(LWKLYWGE)`,5), "", 
+        round(educ_other$`mean(EDUC)`,5), "", 
+        "", "", 
+        "", ""),
+    `(3) Difference (std.error) (1) - (2)` = 
+      c(paste(round(wage_diff$`mean(LWKLYWGE)`,5), 
+        paste0("(", round(wage_err ,5), ")")), "",
+        paste(round(educ_diff$`mean(EDUC)`,5), 
+        paste0("(", round(educ_err, 5), ")")), "",
+        paste(round(wald_est[[1]], 5), 
+        paste0("(", round(wald_err[[1]], 5), ")")), "",
+        paste(round(ols_est[[1]], 5), 
+        paste0("(", round(ols_err[[1]], 5), ")")), "")
   )
-}
-reg.1 <- felm(helper(outcome, vars, fe_1, iv, cluster), data)
-reg.2 <- felm(helper(outcome, vars, fe_1, iv, cluster), filter(data, is.na(trimgroup)))
 
-reg.3 <- felm(helper(outcome, vars, fe_2, iv, cluster), data)
-reg.4 <- felm(helper(outcome, vars, fe_2, iv, cluster), filter(data, is.na(trimgroup)))
-
-stargazer(reg.1, reg.2, reg.3, reg.4,
-          type = "latex", title = 'Main Treatment Effects',
-          column.labels = c('OLS Full', 
-                            'OLS Trimmed', 
-                            'FE Full','FE Trimmed'), 
-          dep.var.labels = 'Real monthly profits (cedi)',
-          covariate.labels = c('Cash Treatment*female', 
-                               'In-kind Treatment*female',
-                               'Cash Treatment*male', 
-                               'In-kind Treatment*male'),
-          style = 'qje')
-```
-\begin{table}[!htbp] \centering 
-  \caption{Main Treatment Effects} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lcccc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
-\\[-1.8ex] & \multicolumn{4}{c}{Real monthly profits (cedi)} \\ 
- & OLS Full & OLS Trimmed & FE Full & FE Trimmed \\ 
-\\[-1.8ex] & (1) & (2) & (3) & (4)\\ 
-\hline \\[-1.8ex] 
- Cash Treatment*female & 5.206 & 5.167 & 1.224 & $-$2.298 \\ 
-  & (8.469) & (8.545) & (9.335) & (8.758) \\ 
-  & & & & \\ 
- In-kind Treatment*female & 35.753$^{**}$ & 37.653$^{**}$ & 35.609$^{***}$ & 32.867$^{**}$ \\ 
-  & (14.937) & (14.943) & (13.541) & (13.194) \\ 
-  & & & & \\ 
- Cash Treatment*male & 28.993 & 16.814 & 8.739 & 5.132 \\ 
-  & (17.683) & (13.253) & (31.545) & (16.083) \\ 
-  & & & & \\ 
- In-kind Treatment*male & 43.377$^{***}$ & 35.451$^{**}$ & 55.146$^{**}$ & 27.825 \\ 
-  & (16.801) & (14.044) & (23.030) & (18.130) \\ 
-  & & & & \\ 
-\textit{N} & 4,354 & 4,203 & 4,354 & 4,203 \\ 
-R$^{2}$ & 0.280 & 0.328 & 0.523 & 0.617 \\ 
-Adjusted R$^{2}$ & 0.244 & 0.294 & 0.415 & 0.530 \\ 
-Residual Std. Error & 179.947 (df = 4145) & 118.839 (df = 4000) & 158.322 (df = 3548) & 96.916 (df = 3425) \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Notes:} & \multicolumn{4}{r}{$^{***}$Significant at the 1 percent level.} \\ 
- & \multicolumn{4}{r}{$^{**}$Significant at the 5 percent level.} \\ 
- & \multicolumn{4}{r}{$^{*}$Significant at the 10 percent level.} \\ 
-\end{tabular} 
-\end{table} 
-
-
-\vspace{1in}
-
-
-```{r, fig.width=8, fig.height=5}
-coefs_se_1 <- as.data.frame(summary(reg.1)$coefficients[ , c("Estimate", "Cluster s.e.")])
-coefs_se_1 <- rownames_to_column(coefs_se_1, "variable")
-
-coefs_se_2 <- as.data.frame(summary(reg.2)$coefficients[ , c("Estimate", "Cluster s.e.")])
-coefs_se_2 <- rownames_to_column(coefs_se_2, "variable")
-
-coefs_se_3 <- as.data.frame(summary(reg.3)$coefficients[ , c("Estimate", "Cluster s.e.")])
-coefs_se_3 <- rownames_to_column(coefs_se_3, "variable")
-
-coefs_se_4 <- as.data.frame(summary(reg.4)$coefficients[ , c("Estimate", "Cluster s.e.")])
-coefs_se_4 <- rownames_to_column(coefs_se_4, "variable")
-
-coefs_se_all <- rbind(coefs_se_1, coefs_se_2, coefs_se_3, coefs_se_4)
-coefs_se_all$reg <- rep(c('OLS Full', 'OLS Trimmed', 'FE Full', 'FE Trimmed'),
-                        each = nrow(coefs_se_1))
-
-coefs_se_all <- coefs_se_all %>%
-  mutate(variable = case_when(
-    variable == 'atreatcashfemale' ~ 'Cash Treatment*female',
-    variable == 'atreatequipfemale' ~ 'In-kind Treatment*female',
-    variable == 'atreatcashmale' ~ 'Cash Treatment*male',
-    variable == 'atreatequipmale' ~ 'In-kind Treatment*male'
-  ))
-
-ggplot(coefs_se_all, aes(x = variable, y = Estimate, color = variable)) + 
-  facet_wrap(~reg, nrow=2) + scale_color_nejm() + 
-  geom_pointrange(aes(ymin = Estimate - 1.96 * `Cluster s.e.`,
-                      ymax = Estimate + 1.96 * `Cluster s.e.`)) + 
-  geom_text(aes(label = paste(round(Estimate, 2), 
-                              paste0(paste0('(', round(`Cluster s.e.`,2), ')')))), 
-            hjust = -0.15, vjust = -0.5, size = 3) +
-  labs(title="Coefficient Plot of Table 3 Regressions\n") +
-  ylab("Coefficient Estimate") +
-  xlab("") + 
-  theme_bw() + theme_minimal() +
-  coord_flip() +
-  geom_hline(yintercept = 0, color = 'red', alpha = 0.1) +
-  theme(legend.position = "none", 
-        plot.title = element_text(
-        color = "black", 
-        size = 12, 
-        face = "bold",
-        margin = margin(t = 15),
-        hjust = 0.5) )
+kable(
+    table,
+    caption =  "Panel B: Wald Estimates for 1980 Census - Men Born 1930-1939",
+    align = "c",
+    col.names = c("", "(1) Born in 1st quarter of year", 
+                  "(2) Born in 2nd, 3rd, or 4th quarter of year", 
+                  "(3) Difference (std.error) (1) - (2)"))  
 ```
 
 
-Try implementing the fixed effects specification either for question 18 or 19 above, and report your coefficients as a table or coefficient plot respectively. (2 extra points)	
-
-\color{blue}
-Done (see FE regression in 18 and 19)
-\color{black}
 
 
-20.	Submit your R script to the Canvas assignment as a separate .R file (or .Rmd file, if you used Rmarkdown). We may pass submissions through a program to check if they run. To pre-test your code, you can verify it runs on our environment. Go to the math camp space and copy the project API-210_PS-01_eval. The dataset is already uploaded in that project, so if you copy your R code and source/run everything after aligning the file paths, it should produce the correct figures and tables. (4 points)
+18.	Table V reports different specifications of the TSLS for men born 1930-1939. Run TSLS similar as in Column 2 and Column 6. First, instrument education with a set of quarter-of-birth x year-of-birth dummies, and add year fix effects as control. Why do we want to include year fix effects?
+Second, similarly to Column 6, instrument education with the same interaction dummies, and add regional fix effects, year fix effects, race, married status, and an urban dummy.
 
 
-\color{blue}
-Done
-\color{black}
-
-## RCTs in Your Own Work (8 points)
-
-21.	Propose a specific policy question that could best be answered using an RCT.  Explain the question in non-technical terms in no more than 3-5 sentences. Write out the empirical specification you would use. (4 points)
-
-\color{blue}
-A speciic policy question that could best be answered using an RCT would be-- what is the effect of free/reduced dental care on non dental-insured Medicare beneficiaries. To test this question, I would seek to enroll a large sample of Medicare beneficiaries who do not currently have dental insurance and randomize them into two arms: control arm where enrollees get gift cards for completing health surveys, and treatment group where they receive free/reduced dental care. 
-
-I would then estimate
-
-\[Y_{it} = \beta_0 + D\beta_1 + \varepsilon_i\]
-
-Where $Y_{it}$ is the potential outcome (health gains) of individual $i$ in wave $t$ if they were assigned to the dental program, $D$ is a binary variable indicating treatment assignment (1 if assigned to the dental program, 0 otherwise), $\beta_0$ is the average potential outcome in the control group, $\beta_1$ is the average treatment effect, and $\varepsilon_i$ is the error term.
-
-\color{black}
-
-22.	Describe your treatment group. Propose a comparison group and explain why you chose that group. (2 points)
-
-\color{blue}
-My treatment group would be non-dental insured Medicare beneficiaries that have been recruited and randomized to the free/reduced dental care arm of the experiment. The comparison group would be those that were randomized to the control arm. This comparison makes sense because after randomization, the two groups should be balanced on characteristics that impact overall health.
-\color{black}
 
 
-23.	Is it possible that the control group could be “contaminated” as a result of interacting with the treatment group? Explain which measures you would take to limit this contamination. (2 points)
+19.	Now repeat the same exercise as the first 2LS2 in Question 18 (without additional controls, only year fix effects), but without using a built-in IV function – use only lm instead. Are your results the same as in the previous question?
 
 
-\color{blue}
-In this case, it is very unlikely that the control group could be contaminated. The reason is because the treatment is being offered free/reduced dental care, and that benefit to the treatment group will not make those in the control group more likely to pursue dental care that they were not previously receiving.
-\color{black}
+
+
+20.	For the purpose of this question, define treatment as completing high school (12 or more years of education), and the instrument as binary, with Zi=1 if one is born in the fourth quarter, and 0 otherwise.
+
+
+
+a.	What is the share of the complier population?
+
+
+b.	What is the average untreated outcome among the never-takers?
+
+
+c.	What is the average treated outcome among the always-takers?
+
+
+d.	Is there selection into treatment? State the assumptions necessary for your conclusion.
 
 
 
