@@ -507,3 +507,42 @@ d.	Is there selection into treatment? State the assumptions necessary for your c
 
 
 
+### IVs in Your Own Research
+
+
+21.	Think about a social relationship that would be best studied using an IV approach. Briefly state the research question and the main variables of interest in non-technical terms. 
+
+
+The research question could be "What is the effect of nurse staffing levels on patient outcomes in hospitals?" The main variables of interest would be the nurse staffing levels (nurse-to-patient ratios) and the patient outcomes (re-admission rates, length of hospital stay).
+
+Because nurse staffing levels may be endogenous (i.e., they may be correlated with unobserved factors that affect patient outcomes), an instrumental variable approach could be used to estimate the causal effect of nurse staffing levels on patient outcomes. A plausible instrument for nurse staffing levels could be a state-mandated minimum nurse-to-patient ratio. This instrument could be used to estimate the causal effect of nurse staffing levels on patient outcomes by focusing on the population of patients who are most likely to be affected by nurse staffing levels (those who are admitted to hospitals with staffing levels near the state-mandated minimum).
+
+
+
+22.	Write out the empirical specification you would use and explain the equation. 
+
+
+\[\text{Outcome}_i = \alpha + \beta\cdot\text{StaffingLevel}_i + \epsilon_i \]
+
+\[\text{StaffingLevel}_i = \gamma\cdot\text{MinimumRatio}_i + \delta_i\]
+
+In this specification, $\text{Outcome}_i$ represents the patient outcome for patient $i$, $\text{StaffingLevel}_i$ represents the nurse staffing level for patient $i$, and $\text{MinimumRatio}_i$ represents the state-mandated minimum nurse-to-patient ratio for the hospital where patient $i$ is admitted. The coefficient $\beta$ represents the estimated effect of a one-unit increase in nurse staffing levels on patient outcomes, holding all other factors constant. The coefficient $\gamma$ represents the estimated effect of a one-unit increase in the state-mandated minimum ratio on nurse staffing levels, holding all other factors constant. The error terms $\epsilon_i$ and $\delta_i$ capture the unobserved factors that affect patient outcomes and nurse staffing levels, respectively.
+
+To estimate the causal effect of nurse staffing levels on patient outcomes, an instrumental variable approach can be used where the first-stage regression of $\text{StaffingLevel}_i$ on $\text{MinimumRatio}_i$ is used to obtain predicted values of nurse staffing levels. The predicted values are then used as the instrumental variable in the second-stage regression of $\text{Outcome}_i$ on the predicted values of $\text{StaffingLevel}_i$.
+
+
+
+
+
+23.	If you clustered your standard errors or included fixed effects, explain why these methods reduced the likelihood of bias in your results (and if applicable, in which direction). If you did not, explain why these methods were not appropriate in your setting. 
+
+
+
+
+
+
+
+
+
+
+

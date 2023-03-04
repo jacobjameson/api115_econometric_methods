@@ -2989,6 +2989,64 @@ print(late / mean(data$treatment))</code></pre>
 <li>Is there selection into treatment? State the assumptions necessary
 for your conclusion.</li>
 </ol>
+<div id="ivs-in-your-own-research" class="section level3">
+<h3>IVs in Your Own Research</h3>
+<ol start="21" style="list-style-type: decimal">
+<li>Think about a social relationship that would be best studied using
+an IV approach. Briefly state the research question and the main
+variables of interest in non-technical terms.</li>
+</ol>
+<p>The research question could be “What is the effect of nurse staffing
+levels on patient outcomes in hospitals?” The main variables of interest
+would be the nurse staffing levels (nurse-to-patient ratios) and the
+patient outcomes (re-admission rates, length of hospital stay).</p>
+<p>Because nurse staffing levels may be endogenous (i.e., they may be
+correlated with unobserved factors that affect patient outcomes), an
+instrumental variable approach could be used to estimate the causal
+effect of nurse staffing levels on patient outcomes. A plausible
+instrument for nurse staffing levels could be a state-mandated minimum
+nurse-to-patient ratio. This instrument could be used to estimate the
+causal effect of nurse staffing levels on patient outcomes by focusing
+on the population of patients who are most likely to be affected by
+nurse staffing levels (those who are admitted to hospitals with staffing
+levels near the state-mandated minimum).</p>
+<ol start="22" style="list-style-type: decimal">
+<li>Write out the empirical specification you would use and explain the
+equation.</li>
+</ol>
+<p><span class="math display">\[\text{Outcome}_i = \alpha +
+\beta\cdot\text{StaffingLevel}_i + \epsilon_i \]</span></p>
+<p><span class="math display">\[\text{StaffingLevel}_i =
+\gamma\cdot\text{MinimumRatio}_i + \delta_i\]</span></p>
+<p>In this specification, <span class="math inline">\(\text{Outcome}_i\)</span> represents the patient
+outcome for patient <span class="math inline">\(i\)</span>, <span class="math inline">\(\text{StaffingLevel}_i\)</span> represents the
+nurse staffing level for patient <span class="math inline">\(i\)</span>,
+and <span class="math inline">\(\text{MinimumRatio}_i\)</span>
+represents the state-mandated minimum nurse-to-patient ratio for the
+hospital where patient <span class="math inline">\(i\)</span> is
+admitted. The coefficient <span class="math inline">\(\beta\)</span>
+represents the estimated effect of a one-unit increase in nurse staffing
+levels on patient outcomes, holding all other factors constant. The
+coefficient <span class="math inline">\(\gamma\)</span> represents the
+estimated effect of a one-unit increase in the state-mandated minimum
+ratio on nurse staffing levels, holding all other factors constant. The
+error terms <span class="math inline">\(\epsilon_i\)</span> and <span class="math inline">\(\delta_i\)</span> capture the unobserved factors
+that affect patient outcomes and nurse staffing levels,
+respectively.</p>
+<p>To estimate the causal effect of nurse staffing levels on patient
+outcomes, an instrumental variable approach can be used where the
+first-stage regression of <span class="math inline">\(\text{StaffingLevel}_i\)</span> on <span class="math inline">\(\text{MinimumRatio}_i\)</span> is used to obtain
+predicted values of nurse staffing levels. The predicted values are then
+used as the instrumental variable in the second-stage regression of
+<span class="math inline">\(\text{Outcome}_i\)</span> on the predicted
+values of <span class="math inline">\(\text{StaffingLevel}_i\)</span>.</p>
+<ol start="23" style="list-style-type: decimal">
+<li>If you clustered your standard errors or included fixed effects,
+explain why these methods reduced the likelihood of bias in your results
+(and if applicable, in which direction). If you did not, explain why
+these methods were not appropriate in your setting.</li>
+</ol>
+</div>
 </div>
 
 
