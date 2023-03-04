@@ -2,7 +2,10 @@
 title: "PROBLEM SET 2"
 author: "Jacob Jameson"
 date: "Due on Tuesday March 7, 2023"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
 ---
     
 ### IDENTIFICATION
@@ -229,7 +232,8 @@ kable(
     caption = "Quarter-of-birth effect", 
     align = "c", 
     col.names = c("Outcome Variable", "Birth Cohort", 
-                  "Mean", "I", "II", "III", "F-test")) 
+                  "Mean", "I", "II", "III", "F-test")) %>%
+  kable_styling(full_width = FALSE)
 ```
 
 
@@ -239,12 +243,35 @@ kable(
 
 
 
-```{r}
-reg.reduced.form <- felm(QOB ~ LWKLYWGE|0|0|0,data)
+```{r, results='hide'}
+data$YOB <- as.factor(data$YOB)
 
+reg.reduced.form <- felm(QOB ~ LWKLYWGE|0|0|0,data)
 reg.reduced.form.fe <- felm(QOB ~ LWKLYWGE|YOB|0|0,data)
+
+stargazer(reg.reduced.form, reg.reduced.form.fe, type = "html", 
+          column.labels = c("Reduced Form 1 (OLS)", "Reduced Form  2 (FE)"))
 ```
 
+<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">Quarter of Birth</td></tr>
+<tr><td style="text-align:left"></td><td>Reduced Form 1 (OLS)</td><td>Reduced Form 2 (FE)</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Log of weekly earnings</td><td>0.014<sup>***</sup></td><td>0.014<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.003)</td><td>(0.003)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>2.425<sup>***</sup></td><td></td></tr>
+<tr><td style="text-align:left"></td><td>(0.017)</td><td></td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>329,509</td><td>329,509</td></tr>
+<tr><td style="text-align:left">R<sup>2</sup></td><td>0.0001</td><td>0.0002</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.0001</td><td>0.0002</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>1.112 (df = 329507)</td><td>1.112 (df = 329498)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
+\newpage
 
 
 
@@ -322,14 +349,76 @@ kable(
     align = "c",
     col.names = c("", "(1) Born in 1st quarter of year", 
                   "(2) Born in 2nd, 3rd, or 4th quarter of year", 
-                  "(3) Difference (std.error) (1) - (2)"))  
+                  "(3) Difference (std.error) (1) - (2)")) %>%
+  kable_styling(full_width = FALSE)
 ```
 
 
 
 
 18.	Table V reports different specifications of the TSLS for men born 1930-1939. Run TSLS similar as in Column 2 and Column 6. First, instrument education with a set of quarter-of-birth x year-of-birth dummies, and add year fix effects as control. Why do we want to include year fix effects?
+
 Second, similarly to Column 6, instrument education with the same interaction dummies, and add regional fix effects, year fix effects, race, married status, and an urban dummy.
+
+
+
+```{r, results='hide'}
+ivreg.2 <- ivreg(LWKLYWGE ~ EDUC + YOB | QOB*YOB, data = data)
+
+ivreg.6 <- ivreg(LWKLYWGE ~ EDUC + YOB + NEWENG + 
+                   MIDATL + ENOCENT + WNOCENT + 
+                   SOATL + ESOCENT + WSOCENT + MT +
+                   RACE + SMSA + MARRIED | QOB*YOB, data = data)
+
+
+varnames <- c("EDUC", "RACE", "SMSA", "MARRIED")
+labels <- c("Years of Education", "Race (1 == black)", 
+            "SMSA (1 == city center)", "Married (1 == married)")
+
+birth_dummy <- c("Yes", "Yes")
+region_dummy <- c("No", "Yes")
+
+stargazer(ivreg.2, ivreg.6, type = "html", 
+          coef.names = labels, 
+          covariate.labels = labels, 
+          covariate.include = varnames, 
+          column.labels = c("Model 2 (TSLS)", "Model 6 (TSLS)"), 
+          add.lines = list(c("9 Year of Birth dummies", birth_dummy[1], birth_dummy[2]), 
+                           c("8 Region of Residence dummies", 
+                             region_dummy[1], region_dummy[2])),
+                    omit = c("QOB", "YOB", "NEWENG", "MIDATL",
+                             "ENOCENT", "WNOCENT", "SOATL", "ESOCENT", 
+                             "WSOCENT", "MT"))
+```
+<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">LWKLYWGE</td></tr>
+<tr><td style="text-align:left"></td><td>Model 2 (TSLS)</td><td>Model 6 (TSLS)</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Years of Education</td><td>0.089<sup>***</sup></td><td>0.068<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.016)</td><td>(0.024)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Race (1 == black)</td><td></td><td>-0.411</td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.514)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">SMSA (1 == city center)</td><td></td><td>-0.783<sup>*</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.415)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Married (1 == married)</td><td></td><td>0.486</td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.522)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>4.793<sup>***</sup></td><td>4.872<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.201)</td><td>(0.821)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">9 Year of Birth dummies</td><td>Yes</td><td>Yes</td></tr>
+<tr><td style="text-align:left">8 Region of Residence dummies</td><td>No</td><td>Yes</td></tr>
+<tr><td style="text-align:left">Observations</td><td>329,509</td><td>329,509</td></tr>
+<tr><td style="text-align:left">R<sup>2</sup></td><td>0.110</td><td>-0.082</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.110</td><td>-0.082</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>0.640 (df = 329498)</td><td>0.706 (df = 329487)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
 
 
 
@@ -338,8 +427,44 @@ Second, similarly to Column 6, instrument education with the same interaction du
 
 
 
+```{r, results='hide'}
+model_edu <- lm(EDUC ~ QOB*YOB, data = data)
+data$educ_pred <- predict(model_edu)
+
+model_lwklywge <- lm(LWKLYWGE ~ educ_pred + YOB, data = data)
+
+stargazer(model_lwklywge, type = "html", 
+          column.labels = c("Model 2 (TSLS) Only Using `lm`"), 
+                    omit = c("QOB", "YOB"))
+```
+
+
+<table style="text-align:center"><tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="1" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td>LWKLYWGE</td></tr>
+<tr><td style="text-align:left"></td><td>Model 2 (TSLS) Only Using `lm`</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">educ_pred</td><td>0.089<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.017)</td></tr>
+<tr><td style="text-align:left"></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>4.793<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.213)</td></tr>
+<tr><td style="text-align:left"></td><td></td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>329,509</td></tr>
+<tr><td style="text-align:left">R<sup>2</sup></td><td>0.0001</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.0001</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>0.679 (df = 329498)</td></tr>
+<tr><td style="text-align:left">F Statistic</td><td>3.709<sup>***</sup> (df = 10; 329498)</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
+
+
+The results of the `lm()` and `ivreg()` models differ slightly because the `lm()` model does not directly address the endogeneity of `EDUC` like the `ivreg()` model does with instrumental variables. Using predicted values from a separate regression might not fully account for the endogeneity and could bias the estimates. For instance I can see that my coefficient is about the same, but the standard errors are different.
+
+
+
 
 20.	For the purpose of this question, define treatment as completing high school (12 or more years of education), and the instrument as binary, with Zi=1 if one is born in the fourth quarter, and 0 otherwise.
+
 
 
 
