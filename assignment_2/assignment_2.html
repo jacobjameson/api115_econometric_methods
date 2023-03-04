@@ -2960,14 +2960,34 @@ high school (12 or more years of education), and the instrument as
 binary, with Zi=1 if one is born in the fourth quarter, and 0
 otherwise.</li>
 </ol>
+<pre class="r"><code>data$treatment &lt;- ifelse(data$EDUC &gt;= 12, 1, 0)
+data$QOB_dummy.4 &lt;- ifelse(data$QOB == 4, 1, 0)</code></pre>
 <ol style="list-style-type: lower-alpha">
-<li><p>What is the share of the complier population?</p></li>
-<li><p>What is the average untreated outcome among the
-never-takers?</p></li>
-<li><p>What is the average treated outcome among the
-always-takers?</p></li>
-<li><p>Is there selection into treatment? State the assumptions
-necessary for your conclusion.</p></li>
+<li>What is the share of the complier population?</li>
+</ol>
+<pre class="r"><code>iv_reg &lt;- ivreg(LWKLYWGE ~ treatment | QOB_dummy.4, data = data)
+
+# Extract the LATE
+late &lt;- summary(iv_reg)$coefficients[2]
+
+# Calculate the share of compliers
+print(late / mean(data$treatment))</code></pre>
+<pre><code>## [1] 0.6195032</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the average untreated outcome among the never-takers?</li>
+</ol>
+<pre class="r"><code>mean(ifelse(data$treatment == 0 &amp; data$QOB_dummy.4 == 0, 
+                  data$LWKLYWGE, NA), na.rm = TRUE)</code></pre>
+<pre><code>## [1] 5.594505</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is the average treated outcome among the always-takers?</li>
+</ol>
+<pre class="r"><code>mean(ifelse(data$treatment == 1 &amp; data$QOB_dummy.4 == 1, 
+                  data$LWKLYWGE, NA), na.rm = TRUE)</code></pre>
+<pre><code>## [1] 5.990925</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Is there selection into treatment? State the assumptions necessary
+for your conclusion.</li>
 </ol>
 </div>
 

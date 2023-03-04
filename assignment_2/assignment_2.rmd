@@ -467,15 +467,40 @@ The results of the `lm()` and `ivreg()` models differ slightly because the `lm()
 20.	For the purpose of this question, define treatment as completing high school (12 or more years of education), and the instrument as binary, with Zi=1 if one is born in the fourth quarter, and 0 otherwise.
 
 
-
+```{r}
+data$treatment <- ifelse(data$EDUC >= 12, 1, 0)
+data$QOB_dummy.4 <- ifelse(data$QOB == 4, 1, 0)
+```
 
 a.	What is the share of the complier population?
+
+
+```{r}
+iv_reg <- ivreg(LWKLYWGE ~ treatment | QOB_dummy.4, data = data)
+
+# Extract the LATE
+late <- summary(iv_reg)$coefficients[2]
+
+# Calculate the share of compliers
+print(late / mean(data$treatment))
+```
 
 
 b.	What is the average untreated outcome among the never-takers?
 
 
+```{r}
+mean(ifelse(data$treatment == 0 & data$QOB_dummy.4 == 0, 
+                  data$LWKLYWGE, NA), na.rm = TRUE)
+```
+
 c.	What is the average treated outcome among the always-takers?
+
+
+```{r}
+mean(ifelse(data$treatment == 1 & data$QOB_dummy.4 == 1, 
+                  data$LWKLYWGE, NA), na.rm = TRUE)
+```
 
 
 d.	Is there selection into treatment? State the assumptions necessary for your conclusion.
