@@ -2299,27 +2299,27 @@ Residual Std. Error
 Replicate both estimates for men born 1930-1939 (Panel B).</li>
 </ol>
 <pre class="r"><code>data$QOB_dummy &lt;- ifelse(data$QOB == 1, 1, 0)
-wage_1st &lt;- data %&gt;% filter(QOB == 1) %&gt;% summarise(mean(LWKLYWGE))
-wage_other &lt;- data %&gt;% filter(QOB != 1) %&gt;% summarise(mean(LWKLYWGE))
+
+group1 &lt;- data %&gt;% filter(QOB == 1)
+group2 &lt;- data %&gt;% filter(QOB != 1)
+
+wage_1st &lt;- mean(group1$LWKLYWGE)
+se1 &lt;- sd(group1$LWKLYWGE) / sqrt(nrow(group1))
+
+wage_other &lt;-  mean(group2$LWKLYWGE)
+se2 &lt;- sd(group2$LWKLYWGE) / sqrt(nrow(group2))
+
 wage_diff &lt;- wage_1st - wage_other
+wage_err &lt;- sqrt(se1^2 + se2^2)
 
-wage_err &lt;- sqrt(
-sum(data %&gt;% filter(QOB == 1) %&gt;% summarise(sd(LWKLYWGE)^2),
-    data %&gt;% filter(QOB != 1) %&gt;% summarise(sd(LWKLYWGE)^2))
-)
+educ_1st &lt;- mean(group1$EDUC)
+se1 &lt;- sd(group1$EDUC) / sqrt(nrow(group1))
 
-educ_1st &lt;- data %&gt;% filter(QOB == 1) %&gt;% 
-  summarise(mean(EDUC))
-
-educ_other &lt;- data %&gt;% filter(QOB != 1) %&gt;% 
-  summarise(mean(EDUC))
+educ_other &lt;- mean(group2$EDUC)
+se2 &lt;- sd(group2$EDUC) / sqrt(nrow(group2))
 
 educ_diff &lt;- educ_1st - educ_other
-
-educ_err &lt;- sqrt(
-sum(data %&gt;% filter(QOB == 1) %&gt;% summarise(sd(EDUC)^2),
-    data %&gt;% filter(QOB != 1) %&gt;% summarise(sd(EDUC)^2))
-)
+educ_err &lt;- sqrt(se1^2 + se2^2)
 
 # wald return to education
 data$EDUC_pred &lt;- lm(EDUC ~ QOB_dummy, data = data) %&gt;% predict()
@@ -2340,19 +2340,19 @@ table &lt;- data.frame(
                  &quot;Wald est. of return to education&quot;, &quot;&quot;, 
                  &quot;OLS return to education&quot;, &quot;&quot;),
     `(1) Born in 1st quarter of year` = 
-      c(round(wage_1st$`mean(LWKLYWGE)`,5), &quot;&quot;, 
-        round(educ_1st$`mean(EDUC)`,5), &quot;&quot;, 
+      c(round(wage_1st,5), &quot;&quot;, 
+        round(educ_1st,5), &quot;&quot;, 
         &quot;&quot;, &quot;&quot;, 
         &quot;&quot;, &quot;&quot;),
     `(2) Born in 2nd, 3rd, or 4th quarter of year` = 
-      c(round(wage_other$`mean(LWKLYWGE)`,5), &quot;&quot;, 
-        round(educ_other$`mean(EDUC)`,5), &quot;&quot;, 
+      c(round(wage_other,5), &quot;&quot;, 
+        round(educ_other,5), &quot;&quot;, 
         &quot;&quot;, &quot;&quot;, 
         &quot;&quot;, &quot;&quot;),
     `(3) Difference (std.error) (1) - (2)` = 
-      c(paste(round(wage_diff$`mean(LWKLYWGE)`,5), 
+      c(paste(round(wage_diff,5), 
         paste0(&quot;(&quot;, round(wage_err ,5), &quot;)&quot;)), &quot;&quot;,
-        paste(round(educ_diff$`mean(EDUC)`,5), 
+        paste(round(educ_diff,5), 
         paste0(&quot;(&quot;, round(educ_err, 5), &quot;)&quot;)), &quot;&quot;,
         paste(round(wald_est[[1]], 5), 
         paste0(&quot;(&quot;, round(wald_err[[1]], 5), &quot;)&quot;)), &quot;&quot;,
@@ -2402,7 +2402,7 @@ ln (wkly. wage)
 5.90269
 </td>
 <td style="text-align:center;">
--0.0111 (0.96098)
+-0.0111 (0.00274)
 </td>
 </tr>
 <tr>
@@ -2426,7 +2426,7 @@ Education
 12.79688
 </td>
 <td style="text-align:center;">
--0.10882 (4.65365)
+-0.10882 (0.01332)
 </td>
 </tr>
 <tr>
