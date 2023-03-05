@@ -41,7 +41,7 @@ output:
 
 <p style="color:blue">The omitted variable bias formula is given by $\alpha_1 = \beta_1 + \beta_2\gamma_1$, where $\alpha_1$ is the coefficient from the regression, $\beta_1$ is the true coefficient, $\beta_2$ is the coefficient of the omitted variable in the true regression, and $\gamma_1$ is the coefficient on the variable of interest in an auxiliary regression of the omitted variable on the variable of interest.</p>
 
-Two possible confounders that would bias the results from the naïve regression are natural ability and socioeconomic status. Natural ability is positively associated with earnings ($\beta_2>0$) and education ($\gamma_1>0$), leading to an overestimate of the true effect. Similarly, socioeconomic status is also positively associated with earnings ($\beta_2>0$) and education ($\gamma_1>0$), resulting in an overestimate of the true effect if omitted.</p>
+<p style="color:blue">Two possible confounders that would bias the results from the naïve regression are natural ability and socioeconomic status. Natural ability is positively associated with earnings ($\beta_2>0$) and education ($\gamma_1>0$), leading to an overestimate of the true effect. Similarly, socioeconomic status is also positively associated with earnings ($\beta_2>0$) and education ($\gamma_1>0$), resulting in an overestimate of the true effect if omitted.</p>
 
 
 3.	What is/are the instrument(s) used by the authors in this study, and what are those instruments instrumenting for?
@@ -132,9 +132,9 @@ c.	Why do the authors estimate coefficients for the bottom part of Table 1 ("Col
 
 <p style="color:blue">The Wald estimator is the same as the IV estimator, and its general formula is:</p>
 
-<p style="color:blue">- Reduced form equation: $Y_i = \gamma_0 + \gamma_1 Z_i + e_i$</p>
-<p style="color:blue">- First stage equation: $X_i = \pi_0 + \pi_1 Z_i + v_i$</p>
-<p style="color:blue">- Wald estimator = $\gamma_1 / \pi_1$</p>
+<p style="color:blue">Reduced form equation: $Y_i = \gamma_0 + \gamma_1 Z_i + e_i$</p>
+<p style="color:blue">First stage equation: $X_i = \pi_0 + \pi_1 Z_i + v_i$</p>
+<p style="color:blue">Wald estimator = $\gamma_1 / \pi_1$</p>
 
 <p style="color:blue">The basic intuition behind the Wald estimator is that it isolates the impact of the instrument on the outcome of interest and scales it by the amount that the instrument impacts the endogenous variable. Compared to the OLS estimate, the IV estimator (Wald) is less precise but unbiased, assuming that all proper assumptions hold.</p>
 

@@ -1917,6 +1917,7 @@ coefficient of the omitted variable in the true regression, and <span class="mat
 variable of interest in an auxiliary regression of the omitted variable
 on the variable of interest.
 </p>
+<p style="color:blue">
 Two possible confounders that would bias the results from the naïve
 regression are natural ability and socioeconomic status. Natural ability
 is positively associated with earnings (<span class="math inline">\(\beta_2&gt;0\)</span>) and education (<span class="math inline">\(\gamma_1&gt;0\)</span>), leading to an
@@ -2095,23 +2096,16 @@ The Wald estimator is the same as the IV estimator, and its general
 formula is:
 </p>
 <p style="color:blue">
-<ul>
-<li>Reduced form equation: <span class="math inline">\(Y_i = \gamma_0 +
+Reduced form equation: <span class="math inline">\(Y_i = \gamma_0 +
 \gamma_1 Z_i + e_i\)</span>
 </p>
 <p style="color:blue">
-<ul>
-<li>First stage equation: <span class="math inline">\(X_i = \pi_0 +
-\pi_1 Z_i + v_i\)</span>
+First stage equation: <span class="math inline">\(X_i = \pi_0 + \pi_1
+Z_i + v_i\)</span>
 </p>
 <p style="color:blue">
-<ul>
-<li>Wald estimator = <span class="math inline">\(\gamma_1 /
-\pi_1\)</span>
-</p></li>
-</ul></li>
-</ul></li>
-</ul>
+Wald estimator = <span class="math inline">\(\gamma_1 / \pi_1\)</span>
+</p>
 <p style="color:blue">
 The basic intuition behind the Wald estimator is that it isolates the
 impact of the instrument on the outcome of interest and scales it by the
