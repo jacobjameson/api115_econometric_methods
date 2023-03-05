@@ -12,24 +12,17 @@ output:
 
 (1) Your information
 
-\color{blue}
-Jacob Jameson
-\color{black}
-
+<p style="color:blue">Jacob Jameson</p>
 
 
 (2) Group Members (please list below the classmates you worked with on this problem set):
 
-\color{blue}
-Bohan Li, Jenna Rogers
-\color{black}
+<p style="color:blue">Bohan Li, Jenna Rogers</p>
 
 
 (3)	Compliance with Harvard Kennedy School Academic Code
 
-\color{blue}
-I certify that my work in this problem set complies with the Harvard Kennedy School Academic Code
-\color{black}
+<p style="color:blue">I certify that my work in this problem set complies with the Harvard Kennedy School Academic Code</p>
 
 
 
@@ -39,11 +32,16 @@ I certify that my work in this problem set complies with the Harvard Kennedy Sch
 1.	Read the paper. In a couple of sentences, explain the primary research question that the authors are trying to answer. What is the key logic behind the authors' answer? In a separate sentence, explain why policymakers should care about that question. Use non-technical jargon so that someone without statistical training could understand.
 
 
+<p style="color:blue">The authors aim to determine whether compulsory schooling laws affect educational attainment and earnings, and whether this effect is causal. They use changes in compulsory schooling laws across different US states and birth cohorts as an instrumental variable to estimate the causal effect of schooling on earnings. Policymakers should care about this question because compulsory schooling laws are widely implemented, and if they have no effect on educational attainment or earnings, policymakers may need to reconsider their use.</p>
+
+
 
 2.	The authors used an instrumental variable approach because they believed a naïve observational regression specification (regressing earnings on education) would be insufficient. What are two possible confounders (omitted variables) that would bias the results from this regression? Explain the mechanism of the omitted variable and use the omitted variable bias formula to argue whether it would lead to an understatement or overstatement of the true effect.
 
 
+<p style="color:blue">The omitted variable bias formula is given by $\alpha_1 = \beta_1 + \beta_2\gamma_1$, where $\alpha_1$ is the coefficient from the regression, $\beta_1$ is the true coefficient, $\beta_2$ is the coefficient of the omitted variable in the true regression, and $\gamma_1$ is the coefficient on the variable of interest in an auxiliary regression of the omitted variable on the variable of interest.</p>
 
+Two possible confounders that would bias the results from the naïve regression are natural ability and socioeconomic status. Natural ability is positively associated with earnings ($\beta_2>0$) and education ($\gamma_1>0$), leading to an overestimate of the true effect. Similarly, socioeconomic status is also positively associated with earnings ($\beta_2>0$) and education ($\gamma_1>0$), resulting in an overestimate of the true effect if omitted.</p>
 
 
 3.	What is/are the instrument(s) used by the authors in this study, and what are those instruments instrumenting for?
@@ -56,15 +54,46 @@ I certify that my work in this problem set complies with the Harvard Kennedy Sch
 a.	Explain these characteristics in words, and specific terms of the instrument(s) used in the paper.
 
 
+<p style="color:blue">For an instrument to be considered valid, it must have four characteristics:</p>
+
+<p style="color:blue"> Relevance: The instrument must affect the treatment status, which in this paper means that quarter of birth must affect years of education.</p>
+
+<p style="color:blue">Independence: The instrument must be as good as randomly assigned, which in this paper means that quarter of birth must be as good as random.</p>
+
+<p style="color:blue">Exclusion: The instrument must affect the outcome only through the treatment, which in this paper means that quarter of birth can only affect log earnings via years of education.</p>
+
+<p style="color:blue">Monotonicity: The instrument must affect everyone in the same way, which in this paper means that being born in an early quarter weakly decreases the number of years of compulsory education, and no one actually gets more years of education when they are born in an early quarter.</p>
+
+
+
 b.	Explain these characteristics using random variables and potential outcomes. 
 
 
+
+<p style="color:blue">To explain the characteristics of a valid instrument using random variables and potential outcomes, we can define the following variables:</p>
+
+<p style="color:blue">$D_i$ as the indicator for treatment status</p>
+
+<p style="color:blue">$Z_i$ as the indicator for the instrument</p>
+
+<p style="color:blue">$Y_i$ as the outcome variable</p>
+
+<p style="color:blue">The characteristics are:</p>
+
+<p style="color:blue">Relevance: $E[D_i(1)-D_i(0)]\neq 0$, meaning that the instrument must affect the treatment status.</p>
+
+<p style="color:blue">Independence: $[\{Y(D_i,Z_i);\forall D,Z\},D_i(1),D_i(0)]\perp Z_i$, meaning that the instrument must be independent of the potential outcomes given the treatment status.</p>
+
+<p style="color:blue">Exclusion: $Y_i(D_i,Z_i)$ is only a function of $D_i$, which means that the instrument must affect the outcome only through the treatment status.</p>
+
+<p style="color:blue">Monotonicity: $D_i(1)\geq D_i(0)$ for all $i$, or the reverse. This means that the instrument must have a monotonic effect on the treatment status.</p>
 
 
 5.	Do you believe that the instrument(s) in the paper is/are truly exogenous? Why or why not? If so, provide a brief argument for this assumption. If not, provide an alternate mechanism for how the exogeneity assumption may be violated. 
 
 
 
+<p style="color:blue">I believe that the instrument used in the paper is exogenous. The authors provide several reasons and robustness checks to support this assumption, including the unlikelihood of parents timing the birth of their children, the absence of systematic differences in the characteristics of individuals born in different quarters, and tests for differential trends and sensitivity to alternative specifications. While there may be unobserved factors that could affect the timing of birth, the authors' argument and evidence provide strong support for the exogeneity assumption.</p>
 
 
 
@@ -73,18 +102,50 @@ b.	Explain these characteristics using random variables and potential outcomes.
 a.	Explain how Table 1 is constructed, and give some intuition for the authors' choices.
  
 
+
+<p style="color:blue">Table 1 presents estimates of the effect of each quarter of birth on the outcome variables, relative to individuals born in the 4th quarter. To construct this table, the authors regress the de-trended outcome variables, such as total years of education or high school graduation, on a set of indicator variables indicating the quarter of birth. The table also includes an F-test p-value, which tests whether there are significant within-year-of-birth differences in the average years of education.</p>
+
+
+
 b.	Interpret the coefficient of the first quarter for the outcome variables "Total years of education" and "High school graduate" of the 1930-1939 cohort.
+
+
+<p style="color:blue">For men in the 1930-1939 cohort, the coefficient of the first quarter of birth on total years of education is -0.124, which means that those born in the first quarter have, on average, 0.124 fewer years of education compared to those born in the fourth quarter of the same year.</p>
+
+<p style="color:blue">Similarly, the coefficient of the first quarter of birth on high school graduation is -0.019, which means that those born in the first quarter are, on average, 1.9 percentage points less likely to graduate from high school than those born in the fourth quarter of the same year.</p>
 
 
 c.	Why do the authors estimate coefficients for the bottom part of Table 1 ("College graduate", "Completed master’s degree", "Completed doctoral degree")? How do the results support the validity of their instrument? What assumption of the IV model are they addressing here?
 
 
 
+<p style="color:blue">The authors estimate coefficients for the bottom part of Table 1, which includes college graduates, completed master's degrees, and completed doctoral degrees, to test the validity of their instrument. Individuals who pursue postsecondary education are not subject to binding compulsory schooling laws, and thus birth quarter should not have any impact on those outcomes if the instrument is valid.</p>
+
+<p style="color:blue">The results show that the quarter-of-birth effects are close to zero for postsecondary education, which supports the validity of their instrument. This is consistent with the expectation that individuals who continue to postsecondary education did not discontinue their education as soon as they were legally permitted.</p>
+
+<p style="color:blue">The assumption of the IV model that the authors are addressing here is exclusion, which requires that the instrument (quarter of birth) only impacts the outcomes via the treatment (compulsory schooling). By showing that the instrument has no effect on postsecondary education, the authors provide additional evidence in support of the exclusion assumption.</p>
+
+
+
 7.	Consider Table III and Table IV. Provide a general formula and a basic intuition for the Wald estimator. How does it compare to the OLS estimate? What is the advantage of using TSLS?
+
+
+<p style="color:blue">The Wald estimator is the same as the IV estimator, and its general formula is:</p>
+
+<p style="color:blue">- Reduced form equation: $Y_i = \gamma_0 + \gamma_1 Z_i + e_i$</p>
+<p style="color:blue">- First stage equation: $X_i = \pi_0 + \pi_1 Z_i + v_i$</p>
+<p style="color:blue">- Wald estimator = $\gamma_1 / \pi_1$</p>
+
+<p style="color:blue">The basic intuition behind the Wald estimator is that it isolates the impact of the instrument on the outcome of interest and scales it by the amount that the instrument impacts the endogenous variable. Compared to the OLS estimate, the IV estimator (Wald) is less precise but unbiased, assuming that all proper assumptions hold.</p>
+
+<p style="color:blue">The advantage of using two-stage least squares (TSLS), which is a type of IV estimation, is that it allows us to estimate causal effects without relying on randomized controlled trials. By using a valid instrument to purge the independent variable of the variation that is related to the error term (where omitted variable bias sits), TSLS can provide consistent estimates of causal effects.</p>
 
 
 8.	How would you construct a reduced form table? What would be the purpose thereof? What figure in the paper fulfills this purpose?
 
+<p style="color:blue">To construct a reduced form table, one would typically regress the instrument (quarter of birth) on the outcome of interest (log earnings) and report the coefficient on the instrument. The purpose of the reduced form table is to show the direct impact of the instrument on the variable of interest, without conditioning on any intermediate variables.</p>
+
+<p style="color:blue">In this paper, Tables III and IV provide the reduced form coefficients for the impact of quarter of birth on log earnings, which is the instrumented variable. The coefficient is -0.00898 in Table III and -0.01110 in Table IV (first row, third column in each table), which indicates the direct impact of quarter of birth on log earnings. These reduced form estimates help establish the plausibility of the instrument and provide additional evidence in support of the exclusion restriction assumption.</p>
 
 
 9.	Subsequent papers have found the instrument to be weak for some specifications of the paper. 
@@ -93,12 +154,19 @@ c.	Why do the authors estimate coefficients for the bottom part of Table 1 ("Col
 a.	Provide an intuition for the reason why weak instruments are problematic.
 
 
+<p style="color:blue">Weak instruments are problematic because they generate imprecise and biased estimates. Weak instruments have low explanatory power, leading to large standard errors and weak identification, which makes it harder to estimate the causal effect of interest. Weak instruments may also introduce bias, leading to incorrect conclusions and potentially invalid results.</p>
+
+
 b.	Read the following, explain the intuition, and explain the implications for weak instruments.
 
+
+<p style="color:blue">The intuition here is that when the first stage coefficient is zero, which can happen in the most extreme form of weak instruments, the IV estimator is no longer unbiased or consistent. We cannot rely on the usual asymptotic properties that we can use in OLS. Instead, the estimated coefficient approaches a Cauchy distribution, which is non-standard and lacks a well-defined mean and variance. This means that the standard errors may be severely inflated, leading to incorrect inference. Therefore, it is important to assess the strength of the instrument and consider alternative methods when the instrument is weak.</p>
 
 
 
 c.	Optional: if you know what the bootstrap does, why does bootstrapping not solve the weak identification issue?
+
+
 
 
 
@@ -247,8 +315,8 @@ kable(
 ```{r, results='hide'}
 data$YOB <- as.factor(data$YOB)
 
-reg.reduced.form <- felm(QOB ~ LWKLYWGE|0|0|0,data)
-reg.reduced.form.fe <- felm(QOB ~ LWKLYWGE|YOB|0|0,data)
+reg.reduced.form <- felm(LWKLYWGE ~ QOB|0|0|0,data)
+reg.reduced.form.fe <- felm(LWKLYWGE ~ QOB|YOB|0|0,data)
 
 stargazer(reg.reduced.form, reg.reduced.form.fe, type = "html", 
           column.labels = c("Reduced Form 1 (OLS)", "Reduced Form  2 (FE)"))
@@ -256,22 +324,27 @@ stargazer(reg.reduced.form, reg.reduced.form.fe, type = "html",
 
 <table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
 <tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
-<tr><td style="text-align:left"></td><td colspan="2">Quarter of Birth</td></tr>
+<tr><td style="text-align:left"></td><td colspan="2">LWKLYWGE</td></tr>
 <tr><td style="text-align:left"></td><td>Reduced Form 1 (OLS)</td><td>Reduced Form 2 (FE)</td></tr>
 <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
-<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Log of weekly earnings</td><td>0.014<sup>***</sup></td><td>0.014<sup>***</sup></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">QOB1</td><td>-0.014<sup>***</sup></td><td>-0.014<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.003)</td><td>(0.003)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Constant</td><td>2.425<sup>***</sup></td><td></td></tr>
-<tr><td style="text-align:left"></td><td>(0.017)</td><td></td></tr>
+<tr><td style="text-align:left">QOB2</td><td>-0.009<sup>***</sup></td><td>-0.009<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.003)</td><td>(0.003)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>329,509</td><td>329,509</td></tr>
+<tr><td style="text-align:left">QOB3</td><td>0.001</td><td>0.001</td></tr>
+<tr><td style="text-align:left"></td><td>(0.003)</td><td>(0.003)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>5.904<sup>***</sup></td><td></td></tr>
+<tr><td style="text-align:left"></td><td>(0.002)</td><td></td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>367,727</td><td>367,727</td></tr>
 <tr><td style="text-align:left">R<sup>2</sup></td><td>0.0001</td><td>0.0002</td></tr>
-<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.0001</td><td>0.0002</td></tr>
-<tr><td style="text-align:left">Residual Std. Error</td><td>1.112 (df = 329507)</td><td>1.112 (df = 329498)</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.0001</td><td>0.0001</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>0.678 (df = 367723)</td><td>0.678 (df = 367713)</td></tr>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 </table>
-
 \newpage
 
 
@@ -459,7 +532,7 @@ stargazer(model_lwklywge, type = "html",
 </table>
 
 
-The results of the `lm()` and `ivreg()` models differ slightly because the `lm()` model does not directly address the endogeneity of `EDUC` like the `ivreg()` model does with instrumental variables. Using predicted values from a separate regression might not fully account for the endogeneity and could bias the estimates. For instance I can see that my coefficient is about the same, but the standard errors are different.
+<p style="color:blue">The results of the `lm()` and `ivreg()` models differ slightly because the `lm()` model does not directly address the endogeneity of `EDUC` like the `ivreg()` model does with instrumental variables. Using predicted values from a separate regression might not fully account for the endogeneity and could bias the estimates. For instance I can see that my coefficient is about the same, but the standard errors are different.</p>
 
 
 
@@ -513,22 +586,22 @@ d.	Is there selection into treatment? State the assumptions necessary for your c
 21.	Think about a social relationship that would be best studied using an IV approach. Briefly state the research question and the main variables of interest in non-technical terms. 
 
 
-The research question could be "What is the effect of nurse staffing levels on patient outcomes in hospitals?" The main variables of interest would be the nurse staffing levels (nurse-to-patient ratios) and the patient outcomes (re-admission rates, length of hospital stay).
+<p style="color:blue">The research question could be "What is the effect of nurse staffing levels on patient outcomes in hospitals?" The main variables of interest would be the nurse staffing levels (nurse-to-patient ratios) and the patient outcomes (re-admission rates, length of hospital stay).</p>
 
-Because nurse staffing levels may be endogenous (i.e., they may be correlated with unobserved factors that affect patient outcomes), an instrumental variable approach could be used to estimate the causal effect of nurse staffing levels on patient outcomes. A plausible instrument for nurse staffing levels could be a state-mandated minimum nurse-to-patient ratio. This instrument could be used to estimate the causal effect of nurse staffing levels on patient outcomes by focusing on the population of patients who are most likely to be affected by nurse staffing levels (those who are admitted to hospitals with staffing levels near the state-mandated minimum).
+<p style="color:blue">Because nurse staffing levels may be endogenous (i.e., they may be correlated with unobserved factors that affect patient outcomes), an instrumental variable approach could be used to estimate the causal effect of nurse staffing levels on patient outcomes. A plausible instrument for nurse staffing levels could be a state-mandated minimum nurse-to-patient ratio. This instrument could be used to estimate the causal effect of nurse staffing levels on patient outcomes by focusing on the population of patients who are most likely to be affected by nurse staffing levels (those who are admitted to hospitals with staffing levels near the state-mandated minimum).</p>
 
 
 
 22.	Write out the empirical specification you would use and explain the equation. 
 
 
-\[\text{Outcome}_i = \alpha + \beta\cdot\text{StaffingLevel}_i + \epsilon_i \]
+<p style="color:blue">\[\text{Outcome}_i = \alpha + \beta\cdot\text{StaffingLevel}_i + \epsilon_i \]</p>
 
-\[\text{StaffingLevel}_i = \gamma\cdot\text{MinimumRatio}_i + \delta_i\]
+<p style="color:blue">\[\text{StaffingLevel}_i = \gamma\cdot\text{MinimumRatio}_i + \delta_i\]</p>
 
-In this specification, $\text{Outcome}_i$ represents the patient outcome for patient $i$, $\text{StaffingLevel}_i$ represents the nurse staffing level for patient $i$, and $\text{MinimumRatio}_i$ represents the state-mandated minimum nurse-to-patient ratio for the hospital where patient $i$ is admitted. The coefficient $\beta$ represents the estimated effect of a one-unit increase in nurse staffing levels on patient outcomes, holding all other factors constant. The coefficient $\gamma$ represents the estimated effect of a one-unit increase in the state-mandated minimum ratio on nurse staffing levels, holding all other factors constant. The error terms $\epsilon_i$ and $\delta_i$ capture the unobserved factors that affect patient outcomes and nurse staffing levels, respectively.
+<p style="color:blue">In this specification, $\text{Outcome}_i$ represents the patient outcome for patient $i$, $\text{StaffingLevel}_i$ represents the nurse staffing level for patient $i$, and $\text{MinimumRatio}_i$ represents the state-mandated minimum nurse-to-patient ratio for the hospital where patient $i$ is admitted. The coefficient $\beta$ represents the estimated effect of a one-unit increase in nurse staffing levels on patient outcomes, holding all other factors constant. The coefficient $\gamma$ represents the estimated effect of a one-unit increase in the state-mandated minimum ratio on nurse staffing levels, holding all other factors constant. The error terms $\epsilon_i$ and $\delta_i$ capture the unobserved factors that affect patient outcomes and nurse staffing levels, respectively.</p>
 
-To estimate the causal effect of nurse staffing levels on patient outcomes, an instrumental variable approach can be used where the first-stage regression of $\text{StaffingLevel}_i$ on $\text{MinimumRatio}_i$ is used to obtain predicted values of nurse staffing levels. The predicted values are then used as the instrumental variable in the second-stage regression of $\text{Outcome}_i$ on the predicted values of $\text{StaffingLevel}_i$.
+<p style="color:blue">To estimate the causal effect of nurse staffing levels on patient outcomes, an instrumental variable approach can be used where the first-stage regression of $\text{StaffingLevel}_i$ on $\text{MinimumRatio}_i$ is used to obtain predicted values of nurse staffing levels. The predicted values are then used as the instrumental variable in the second-stage regression of $\text{Outcome}_i$ on the predicted values of $\text{StaffingLevel}_i$.</p>
 
 
 
