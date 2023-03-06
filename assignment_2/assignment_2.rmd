@@ -47,6 +47,8 @@ output:
 3.	What is/are the instrument(s) used by the authors in this study, and what are those instruments instrumenting for?
 
 
+<p style="color:blue">The instrument used in the study is quarter of birth, which is considered to be exogenous and affects the level of compulsory schooling. More specifically, quarter of birth is used to instrument for the number of years of education completed due to the effect it has on the age at which individuals enter school and the subsequent length of time they are required to attend.</p>
+
 
 4.	Generally, what characteristics must an instrument have for it to be considered valid? 
 
@@ -167,17 +169,34 @@ b.	Read the following, explain the intuition, and explain the implications for w
 c.	Optional: if you know what the bootstrap does, why does bootstrapping not solve the weak identification issue?
 
 
-
+<p style="color:blue">Skipped.</p>
 
 
 10.	If you were to write the paper today, how would you detect weak instruments, and what statistic would you use for inference?
 
 Hint: you may want to refer to Andrews, Stock and Sun (2019).
 
+
+To detect weak instruments in modern times, I would use either the F-statistic or the effective F-statistic. If I believe that homoscedasticity holds, I would use an F-statistic greater than 10 as the threshold for testing. However, if I suspect non-homoscedasticity, I would use the effective F-statistic.
+
+
 a.	How is the effective F-statistic constructed?
+
+<p style="color:blue">The effective F-statistic is constructed as follows:</p>
+
+<p style="color:blue">\[g(\beta_0) = \hat{\delta} - \hat{\pi}\beta_0, \text{ where } \hat{\delta}=\hat{\pi}\beta \text{ and } Y_i = \hat{\delta}Z_i + e_i \]</p>
+
+<p style="color:blue">$g(\beta_0)$ is normally distributed with mean 0 and a certain variance ($\Omega(\beta_0)$). Once we standardize by the variance, we arrive at the Anderson-Rubin test statistic, which is:</p>
+
+<p style="color:blue">\[AR(\beta) = n \left[g(\beta)'\Omega(\beta)^{-1} g(\beta) \right] \text{.}\]</p>
+
+<p style="color:blue">This statistic is distributed as a chi-square.</p>
 
 
 b.	How are Anderson-Rubin confidence sets constructed?
+
+
+<p style="color:blue">Anderson-Rubin confidence sets are constructed using an asymptotic pivot that is independent of any unknown parameters. As the number of instruments increases, the AR test statistic converges to a chi-square distribution with degrees of freedom equal to the number of instruments. This distribution can then be used to obtain critical values for constructing confidence intervals.</p>
 
 
 ### The Local Average Treatment Effect
@@ -185,7 +204,13 @@ b.	How are Anderson-Rubin confidence sets constructed?
 11.	Explain the monotonicity assumption in the context of this study. What is required regarding the relationship between variables for monotonicity to be met, and is it reasonable to assume that defiers do not exist? In your explanation, be sure to touch on what does it means to be a defier in this study.
 
 
+<p style="color:blue">In this study, monotonicity assumes that being born earlier in a given year only weakly decreases the number of compulsory years of education completed, with no one receiving more years of education than they would have if born later. This implies that there are no defiers in the sample, or individuals who would have had fewer years of education if they had been born in a different quarter. Given the compulsory schooling laws in place, it is reasonable to assume that defiers do not exist.</p>
+
+
+
 12.	Interpret the IV estimates in Table IV with appropriate units in the context of the study’s research question, treating them as a local average treatment effect. In your interpretation, clarify the population for which this local average treatment effect is identified (i.e., who are the compliers?).
+
+
 
 
 
@@ -532,7 +557,7 @@ stargazer(model_lwklywge, type = "html",
 </table>
 
 
-<p style="color:blue">The results of the `lm()` and `ivreg()` models differ slightly because the `lm()` model does not directly address the endogeneity of `EDUC` like the `ivreg()` model does with instrumental variables. Using predicted values from a separate regression might not fully account for the endogeneity and could bias the estimates. For instance I can see that my coefficient is about the same, but the standard errors are different.</p>
+<p style="color:blue">The results of the `lm()` and `ivreg()` models differ only slightly, for instance I can see that my coefficient is the same, but the standard errors are different. I believe this is because of the DF difference.</p>
 
 
 
@@ -549,10 +574,10 @@ a.	What is the share of the complier population?
 
 
 ```{r}
-iv_reg <- ivreg(LWKLYWGE ~ treatment | QOB_dummy.4, data = data)
+reg <- lm(treatment ~ QOB_dummy.4, data = data)
 
 # Extract the LATE
-late <- summary(iv_reg)$coefficients[2]
+late <- summary(reg)$coefficients[2]
 
 # Calculate the share of compliers
 print(late / mean(data$treatment))
