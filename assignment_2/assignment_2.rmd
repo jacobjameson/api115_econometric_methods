@@ -212,6 +212,7 @@ b.	How are Anderson-Rubin confidence sets constructed?
 
 
 
+<p style="color:blue">Interpreting column 2, the IV estimates provide the causal effect of 1 unit of treatment on the outcome of interest. Here, the coefficient on years of education is 0.0769, meaning that for every year of additional education among compliers, weekly earnings increased by  about 8%. Compliers are those people who because they were born in a later quarter of the year, pursued more education than if they had been born earlier in the year.</p>
 
 
 
@@ -219,6 +220,8 @@ b.	How are Anderson-Rubin confidence sets constructed?
 13.	With 3-5 sentences, discuss the how you believe these results inform policy outside of the specified context.  In your discussion, be sure to touch on the problems specific to generalizing from instrumental variable findings and the particular scope conditions of this paper’s findings.
 
 
+
+<p style="color:blue">Generally, IV estimates (and LATE) only identify the causal effect for compliers. As seen in Table I, the instrument in this paper only moved people with lower levels of educational attainment; that is, compliers are mainly those who stopped school near the compulsory age. I would be cautious to generalize the returns on education to people who pursue advanced education, like master’s or doctorate degrees, as these students and educational conditions are far removed from the LATE setting. I do think that these results could inform policies that modestly raise the age of compulsory education. </p>
 
 
 
@@ -467,8 +470,10 @@ ivreg.2 <- ivreg(LWKLYWGE ~ EDUC + YOB | QOB*YOB, data = data)
 ivreg.6 <- ivreg(LWKLYWGE ~ EDUC + YOB + NEWENG + 
                    MIDATL + ENOCENT + WNOCENT + 
                    SOATL + ESOCENT + WSOCENT + MT +
-                   RACE + SMSA + MARRIED | QOB*YOB, data = data)
-
+                   RACE + SMSA + MARRIED | QOB*YOB + NEWENG + 
+                   MIDATL + ENOCENT + WNOCENT + 
+                   SOATL + ESOCENT + WSOCENT + MT +
+                   RACE + SMSA + MARRIED, data = data)
 
 varnames <- c("EDUC", "RACE", "SMSA", "MARRIED")
 labels <- c("Years of Education", "Race (1 == black)", 
@@ -494,29 +499,30 @@ stargazer(ivreg.2, ivreg.6, type = "html",
 <tr><td style="text-align:left"></td><td colspan="2">LWKLYWGE</td></tr>
 <tr><td style="text-align:left"></td><td>Model 2 (TSLS)</td><td>Model 6 (TSLS)</td></tr>
 <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
-<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Years of Education</td><td>0.089<sup>***</sup></td><td>0.068<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.016)</td><td>(0.024)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Years of Education</td><td>0.100<sup>***</sup></td><td>0.092<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.019)</td><td>(0.020)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Race (1 == black)</td><td></td><td>-0.411</td></tr>
-<tr><td style="text-align:left"></td><td></td><td>(0.514)</td></tr>
+<tr><td style="text-align:left">Race (1 == black)</td><td></td><td>-0.212<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.031)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">SMSA (1 == city center)</td><td></td><td>-0.783<sup>*</sup></td></tr>
-<tr><td style="text-align:left"></td><td></td><td>(0.415)</td></tr>
+<tr><td style="text-align:left">SMSA (1 == city center)</td><td></td><td>-0.146<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.021)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Married (1 == married)</td><td></td><td>0.486</td></tr>
-<tr><td style="text-align:left"></td><td></td><td>(0.522)</td></tr>
+<tr><td style="text-align:left">Married (1 == married)</td><td></td><td>0.241<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.005)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Constant</td><td>4.793<sup>***</sup></td><td>4.872<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.201)</td><td>(0.821)</td></tr>
+<tr><td style="text-align:left">Constant</td><td>4.857<sup>***</sup></td><td>4.776<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.206)</td><td>(0.228)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">9 Year of Birth dummies</td><td>Yes</td><td>Yes</td></tr>
 <tr><td style="text-align:left">8 Region of Residence dummies</td><td>No</td><td>Yes</td></tr>
 <tr><td style="text-align:left">Observations</td><td>329,509</td><td>329,509</td></tr>
-<tr><td style="text-align:left">R<sup>2</sup></td><td>0.110</td><td>-0.082</td></tr>
-<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.110</td><td>-0.082</td></tr>
-<tr><td style="text-align:left">Residual Std. Error</td><td>0.640 (df = 329498)</td><td>0.706 (df = 329487)</td></tr>
+<tr><td style="text-align:left">R<sup>2</sup></td><td>0.099</td><td>0.146</td></tr>
+<tr><td style="text-align:left">Adjusted R<sup>2</sup></td><td>0.099</td><td>0.146</td></tr>
+<tr><td style="text-align:left">Residual Std. Error</td><td>0.644 (df = 329506)</td><td>0.627 (df = 329495)</td></tr>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 </table>
+
 
 
 
@@ -576,11 +582,7 @@ a.	What is the share of the complier population?
 ```{r}
 reg <- lm(treatment ~ QOB_dummy.4, data = data)
 
-# Extract the LATE
-late <- summary(reg)$coefficients[2]
-
-# Calculate the share of compliers
-print(late / mean(data$treatment))
+paste0(round(summary(reg)$coefficients[2],6)*100,'%')
 ```
 
 
@@ -588,20 +590,33 @@ b.	What is the average untreated outcome among the never-takers?
 
 
 ```{r}
-mean(ifelse(data$treatment == 0 & data$QOB_dummy.4 == 0, 
-                  data$LWKLYWGE, NA), na.rm = TRUE)
+compliers <- reg$coefficients[2]
+
+alwaystakers <- reg$coefficients[1]
+
+nevertakers <- 1 - reg$coefficients[2] - reg$coefficients[1]
+
+untreated_outcome <- mean(subset(data, treatment == 0)$LWKLYWGE)
+
+average_nevertakers <- (untreated_outcome * nevertakers )/(compliers + nevertakers)
+average_nevertakers[[1]]
 ```
 
 c.	What is the average treated outcome among the always-takers?
 
 
 ```{r}
-mean(ifelse(data$treatment == 1 & data$QOB_dummy.4 == 1, 
-                  data$LWKLYWGE, NA), na.rm = TRUE)
+treated_outcome <- mean(subset(data, treatment == 1)$LWKLYWGE)
+average_alwaystakers <- (treated_outcome * alwaystakers )/(compliers + alwaystakers)
+average_alwaystakers[[1]]
 ```
 
 
 d.	Is there selection into treatment? State the assumptions necessary for your conclusion.
+
+
+<p style="color:blue">To show that there is no selection into treatment the assumption that we would want to be true is for $Y(0)$ to be the same tor all three groups: compliers. never-takers and always takers.</p>
+
 
 
 
@@ -613,7 +628,7 @@ d.	Is there selection into treatment? State the assumptions necessary for your c
 
 <p style="color:blue">The research question could be "What is the effect of nurse staffing levels on patient outcomes in hospitals?" The main variables of interest would be the nurse staffing levels (nurse-to-patient ratios) and the patient outcomes (re-admission rates, length of hospital stay).</p>
 
-<p style="color:blue">Because nurse staffing levels may be endogenous (i.e., they may be correlated with unobserved factors that affect patient outcomes), an instrumental variable approach could be used to estimate the causal effect of nurse staffing levels on patient outcomes. A plausible instrument for nurse staffing levels could be a state-mandated minimum nurse-to-patient ratio. This instrument could be used to estimate the causal effect of nurse staffing levels on patient outcomes by focusing on the population of patients who are most likely to be affected by nurse staffing levels (those who are admitted to hospitals with staffing levels near the state-mandated minimum).</p>
+<p style="color:blue">Because nurse staffing levels may be endogenous, an instrumental variable approach could be used to estimate the causal effect of nurse staffing levels on patient outcomes. A plausible instrument for nurse staffing levels could be a state-mandated minimum nurse-to-patient ratio. This instrument could be used to estimate the causal effect of nurse staffing levels on patient outcomes by focusing on the population of patients who are most likely to be affected by nurse staffing levels (those who are admitted to hospitals with staffing levels near the state-mandated minimum).</p>
 
 
 
@@ -635,11 +650,7 @@ d.	Is there selection into treatment? State the assumptions necessary for your c
 23.	If you clustered your standard errors or included fixed effects, explain why these methods reduced the likelihood of bias in your results (and if applicable, in which direction). If you did not, explain why these methods were not appropriate in your setting. 
 
 
-
-
-
-
-
+<p style="color:blue">I believe that adding fixed effects for hospitals are essential because the probabilities of having a greater nurse-to-patient ratio is likely to be associated with hospitals individual characteristics so i would like to control for those. I think that doing think that doing so would reduce bias in my estimate because failing to do so I would probably be detecting that more affluent hospitals in more affluent areas have better patient outcomes and greater numbers of nurses on staff.</p>
 
 
 

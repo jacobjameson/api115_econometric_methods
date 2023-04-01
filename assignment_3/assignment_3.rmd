@@ -1,0 +1,99 @@
+---
+title: "PROBLEM SET 3"
+author: "Jacob Jameson"
+output:
+  pdf_document: default
+---
+    
+### IDENTIFICATION
+
+(1) Your information
+
+\color{blue}
+Jacob Jameson
+\color{black}
+
+
+(2) Group Members (please list below the classmates you worked with on this problem set):
+
+\color{blue}
+Bohan Li, Jenna Rogers
+\color{black}
+
+
+(3)	Compliance with Harvard Kennedy School Academic Code
+
+
+\color{blue}
+
+I certify that my work in this problem set complies with the Harvard Kennedy School Academic Code
+
+\color{black}
+
+
+
+### Conceptual Questions 
+
+
+### Data Questions
+
+
+```{r, message=F, echo=F}
+library(tidyverse)
+library(foreign)
+library(lmtest)
+library(gridExtra)
+library(haven)
+library(labelled)
+library(ggsci)
+library(sandwich)
+library(stargazer)
+library(kableExtra)
+library(AER)
+library(lfe)
+library(purrr)
+library(broom)
+library(vtable)
+library(knitr)
+suppressWarnings(library(kableExtra))
+```
+
+
+1.	Create summary statistics for povrate60, mort_age59_related_postHS and two other variables of your choice.  
+
+
+```{r, results='hide', message=F, warning=F}
+data <- read_csv('headstart.csv')
+
+
+sumtable(data, 
+         vars = c('povrate60', 'mort_age59_related_postHS',
+                  'census1960_pop', 'census1990_pctblack'),
+         out='latex')
+```
+\begin{table}[h] \centering \renewcommand*{\arraystretch}{1.1}\caption{Summary Statistics}\resizebox{\textwidth}{!}{
+\begin{tabular}{lrrrrrrr}
+\hline
+\hline
+Variable & N & Mean & Std. Dev. & Min & Pctl. 25 & Pctl. 75 & Max \\ 
+\hline
+povrate60 & 2804 & 37 & 15 & 15 & 24 & 47 & 93 \\ 
+mort\_age59\_related\_postHS & 2785 & 2.3 & 5.7 & 0 & 0 & 2.8 & 136 \\ 
+census1960\_pop & 2804 & 38964 & 117460 & 224 & 9133 & 33417 & 2664438 \\ 
+census1990\_pctblack & 2806 & 0.091 & 0.15 & 0 & 0.0015 & 0.11 & 0.86\\ 
+\hline
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+2.	 Create two balance tables for the 1960 and 1990 census variables (similar to Table I in the QJE article) comparing the county characteristics for counties above and below the poverty rate cutoff of 59.1984%. Add a column showing the estimated difference between the two sets of counties, and the p-value that this difference is statistically significant.
+
+
+
+
+
+
+
+
